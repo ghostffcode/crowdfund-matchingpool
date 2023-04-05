@@ -12,7 +12,6 @@ const progress = tv({
   },
   defaultVariants: {
     size: "md",
-    size: "lg",
   },
 });
 

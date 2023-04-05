@@ -32,7 +32,7 @@ export function createComponent(
   tag: string | PolyComponent,
   variant: TVReturnType<any, any, any, any, any, any>
 ) {
-  return forwardRef(
+  const _Component = forwardRef(
     <C extends React.ElementType>(
       { as, className, ...props }: ComponentProps<C>,
       ref?: PolymorphicRef<C>
@@ -47,5 +47,7 @@ export function createComponent(
         />
       );
     }
-  ) as PolyComponent;
+  ) as any;
+  _Component.displayName = "Component";
+  return _Component;
 }

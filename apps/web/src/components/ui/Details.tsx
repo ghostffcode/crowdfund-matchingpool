@@ -1,5 +1,5 @@
 import { tv } from "tailwind-variants";
-import { createComponent } from "components/ui";
+import { createComponent } from ".";
 
 const details = tv({ base: "" });
 
