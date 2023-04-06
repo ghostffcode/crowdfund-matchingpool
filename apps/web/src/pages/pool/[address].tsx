@@ -1,4 +1,6 @@
 import { type NextPage } from "next";
+import Head from "next/head";
+import { useRouter } from "next/router";
 import { Avatar } from "~/components/ui/Avatar";
 import { Button } from "~/components/ui/Button";
 import { Link } from "~/components/ui/Link";
@@ -37,9 +39,19 @@ const ContributeButton = () => (
     Contribute now
   </Button>
 );
+
+const appUrl = "http://localhost:3000";
 const ViewMatchingPool: NextPage = () => {
+  const router = useRouter();
+  const address = router.query.address;
   return (
     <Layout>
+      <Head>
+        <meta
+          property="og:image"
+          content={`${appUrl}/api/og?poolContract=${address}`}
+        />
+      </Head>
       <h1 className="mb-2 text-3xl">{poolMetadata.title}</h1>
       <h3 className="text-xl leading-8">{poolMetadata.description}</h3>
       <div className="pb-8" />
