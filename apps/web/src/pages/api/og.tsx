@@ -64,6 +64,9 @@ export default async function handler(req: NextRequest) {
                 />
               </div>
             </div>
+            <span tw="text-right w-full">
+              Last updated: {new Date().toLocaleString()}
+            </span>
           </div>
         </div>
       ),

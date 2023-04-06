@@ -1,19 +1,20 @@
+import "@rainbow-me/rainbowkit/styles.css";
+import "~/styles/globals.css";
+
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
-import { SessionProvider } from "next-auth/react";
 
 import { api } from "~/utils/api";
-
-import "~/styles/globals.css";
+import { WalletProvider } from "~/providers/WalletProvider";
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <SessionProvider session={session}>
+    <WalletProvider>
       <Component {...pageProps} />
-    </SessionProvider>
+    </WalletProvider>
   );
 };
 
