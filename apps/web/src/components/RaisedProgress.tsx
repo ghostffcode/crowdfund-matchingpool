@@ -1,8 +1,7 @@
 import { Funds } from "~/types";
 import { createComponent } from "./ui";
 import { tv } from "tailwind-variants";
-
-const formatRaised = (val = "") => `${Number(val) / 1000}k`;
+import { formatMoney } from "~/utils/currency";
 
 type Props = { funds: Funds };
 
@@ -14,9 +13,9 @@ export const RaisedProgress = ({ funds }: Props) => {
       <ProgressBar style={{ width: percentage }} />
       <Indicator style={{ left: percentage }} />
       <CurrentValue style={{ left: percentage, transform: `translateX(-50%)` }}>
-        {formatRaised(funds.raised)} Raised
+        {formatMoney(funds.raised)} Raised
       </CurrentValue>
-      <MaxValue>{formatRaised(funds.goal)} Goal</MaxValue>
+      <MaxValue>{formatMoney(funds.goal)} Goal</MaxValue>
     </Wrapper>
   );
 };

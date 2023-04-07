@@ -1,4 +1,5 @@
 import { Contributor } from "~/types";
+import { formatMoney } from "~/utils/currency";
 import { Avatar } from "./ui/Avatar";
 import { Button } from "./ui/Button";
 
@@ -16,7 +17,7 @@ export const Leaderboard = ({
             <Avatar size="sm" color="gray" />
             <div className="flex flex-1 items-center justify-between pl-4">
               <div>{user.address}</div>
-              <div className="">${user.amount}</div>
+              <div className="">${formatMoney(user.amount)}</div>
             </div>
           </div>
         ))}

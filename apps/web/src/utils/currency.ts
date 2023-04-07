@@ -1,8 +1,4 @@
-export function formatMoney(val = 0, currency?: string, decimals = 2) {
-  return val.toLocaleString("en-US", {
-    currency,
-    style: currency && "currency",
-    minimumFractionDigits: decimals,
-    maximumFractionDigits: decimals,
-  });
-}
+export const formatMoney = (val = "") => {
+  const amount = Number(val);
+  return amount >= 1000 ? `${amount / 1000}k` : amount;
+};

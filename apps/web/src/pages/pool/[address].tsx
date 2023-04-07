@@ -1,4 +1,3 @@
-import { ethers } from "ethers";
 import { GetServerSidePropsContext, type NextPage } from "next";
 import Head from "next/head";
 
@@ -21,6 +20,7 @@ const ViewMatchingPool: NextPage<MatchingPool> = ({
   contributors,
   organizers,
 }) => {
+  console.log(funds);
   return (
     <Layout>
       <Head>
@@ -49,7 +49,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   const { title, description } = poolMetadata;
 
   // Fetch from subgraph
-  const raised = ethers.utils.parseEther(String(15_000));
+  const raised = "15000";
 
   return {
     props: {
@@ -57,8 +57,8 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
       title,
       description,
       funds: {
-        raised: ethers.utils.formatEther(raised),
-        goal: ethers.utils.formatEther(goal),
+        raised,
+        goal,
       },
       organizers,
       contributors,
