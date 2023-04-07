@@ -6,11 +6,11 @@ import { Crowdfund } from "./Crowdfund.sol";
 contract CrowdfundFactory {
     uint256 public totalCrowdfunds;
 
-    event crowdfundCreated(address creator, Crowdfund crowdfund);
+    event CrowdfundCreated(address creator, Crowdfund crowdfund);
 
     function createCrowdfund(bytes calldata meta) public {
         Crowdfund _crowdfund = new Crowdfund(meta);
         
-        emit crowdfundCreated(msg.sender, _crowdfund);
+        emit CrowdfundCreated(msg.sender, _crowdfund);
     }
 }

@@ -23,10 +23,10 @@ contract Crowdfund is Ownable, ReentrancyGuard {
 
     mapping(address => uint256) userFunds;
 
-    event donated(address sender, uint256 amount);
-    event funded(address to, uint256 amount);
-    event refundActive(bool refunding);
-    event userBalanceWithdrawn(address user, uint256 balance);
+    event Donated(address sender, uint256 amount);
+    event Funded(address to, uint256 amount);
+    event RefundActive(bool refunding);
+    event UserBalanceWithdrawn(address user, uint256 balance);
 
     modifier crowfundingEnded() {
         require(!hasCrowdfundingEnded(), "Crowd funding hasn't ended");
@@ -76,14 +76,14 @@ contract Crowdfund is Ownable, ReentrancyGuard {
         // increase user balance
         userFunds[msg.sender] += _donatedAmount;
 
-        emit donated(msg.sender, _donatedAmount);
+        emit Donated(msg.sender, _donatedAmount);
     }
 
     // enableRefund
     function enableRefund() public onlyOwner crowfundingEnded {
         canRefund = true;
 
-        emit refundActive(true);
+        emit RefundActive(true);
     }
 
     // fund
@@ -99,7 +99,7 @@ contract Crowdfund is Ownable, ReentrancyGuard {
             token.safeTransferFrom(address(this), to, amount);
         }
 
-        emit funded(to, amount);
+        emit Funded(to, amount);
     }
 
     // withdraw
@@ -121,7 +121,7 @@ contract Crowdfund is Ownable, ReentrancyGuard {
             token.safeTransferFrom(address(this), msg.sender, amount);
         }
 
-        emit userBalanceWithdrawn(msg.sender, amount);
+        emit UserBalanceWithdrawn(msg.sender, amount);
     }
 
     function tokenIsNative() public view returns (bool) {
