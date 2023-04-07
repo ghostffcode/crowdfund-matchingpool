@@ -9,8 +9,9 @@ import { Organizers } from "~/components/PoolOrganizers";
 import { RaisedProgress } from "~/components/RaisedProgress";
 import { contributors, organizers, pool, poolMetadata } from "~/data/mock";
 import { PoolDetails } from "~/components/PoolDetails";
+import { getBaseUrl } from "~/utils/api";
 
-const appUrl = "http://localhost:3000";
+const appUrl = getBaseUrl();
 
 const ViewMatchingPool: NextPage<MatchingPool> = ({
   address,

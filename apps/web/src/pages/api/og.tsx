@@ -106,9 +106,3 @@ export default async function handler(req: NextRequest) {
     });
   }
 }
-const Stats = ({ value = "", label = "" }) => (
-  <div tw="flex flex-col mb-2">
-    <span tw="text-4xl">{value}</span>
-    <span tw="text-2xl">{label}</span>
-  </div>
-);
