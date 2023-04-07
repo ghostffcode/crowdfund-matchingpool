@@ -19,7 +19,7 @@ dataSources:
         - name: CrowdfundFactory
           file: ./abis/localhost_CrowdfundFactory.json
       eventHandlers:
-        - event: crowdfundCreated(address,address)
+        - event: CrowdfundCreated(address,address)
           handler: handleNewCrowdfund
       file: ./src/mapping.ts
 templates:
@@ -38,14 +38,14 @@ templates:
         - Funder
       abis:
         - name: Crowdfund
-          file: ./abis/localhost_Crowdfund.json
+          file: ./abis/Crowdfund.json
       eventHandlers:
-        - event: donated(address,uint256)
+        - event: Donated(address,uint256)
           handler: donationHandler
-        - event: funded(address,uint256)
+        - event: Funded(address,uint256)
           handler: fundingHandler
-        - event: refundActive(bool)
+        - event: RefundActive(bool)
           handler: refundActivationHandler
-        - event: userBalanceWithdrawn(address,uint256)
+        - event: UserBalanceWithdrawn(address,uint256)
           handler: refundHandler
         
