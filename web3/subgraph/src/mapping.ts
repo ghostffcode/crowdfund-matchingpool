@@ -1,10 +1,10 @@
 // import { BigInt, Address } from "@graphprotocol/graph-ts";
-import { crowdfundCreated } from "../generated/CrowdfundFactory/CrowdfundFactory"
+import { CrowdfundCreated } from "../generated/CrowdfundFactory/CrowdfundFactory"
 import { Crowdfund as CrowdfundSchema, User } from "../generated/schema";
 import { Crowdfund as CrowdfundContract } from "../generated/templates";
 import { Crowdfund } from "../generated/templates/Crowdfund/Crowdfund";
 
-export function handleSetPurpose(event: crowdfundCreated): void {
+export function handleNewCrowdfund(event: CrowdfundCreated): void {
   let creatorString = event.params.creator.toHexString();
   let crowdfundContractAddress = event.params.crowdfund.toHexString();
 

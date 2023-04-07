@@ -1,8 +1,7 @@
-import { BigInt, Address } from "@graphprotocol/graph-ts";
 import { Crowdfund, User, Donor } from "../generated/schema";
-import { donated, funded, refundActive, userBalanceWithdrawn } from '../generated/templates/Crowdfund/Crowdfund';
+import { Donated, Funded, RefundActive, UserBalanceWithdrawn } from '../generated/templates/Crowdfund/Crowdfund';
 
-export function donationHandler(event: donated): void {
+export function donationHandler(event: Donated): void {
   let crowdfundContractAddress = event.address.toHexString();
   let donorAddress = event.params.sender.toHexString();
   let amount = event.params.amount;
@@ -43,7 +42,7 @@ export function donationHandler(event: donated): void {
   crowdfund.save();
 }
 
-export function fundingHandler(event: funded): void {
+export function fundingHandler(event: Funded): void {
   let crowdfundContractAddress = event.address.toHexString();
   let amount = event.params.amount;
 
@@ -59,7 +58,7 @@ export function fundingHandler(event: funded): void {
   crowdfund.save();
 }
 
-export function refundActivationHandler(event: refundActive): void {
+export function refundActivationHandler(event: RefundActive): void {
   let crowdfundContractAddress = event.address.toHexString();
   let refundStatus = event.params.refunding;
 
@@ -75,7 +74,7 @@ export function refundActivationHandler(event: refundActive): void {
   crowdfund.save();
 }
 
-export function refundHandler(event: userBalanceWithdrawn): void {
+export function refundHandler(event: UserBalanceWithdrawn): void {
   let crowdfundContractAddress = event.address.toHexString();
   let donorAddress = event.params.user.toHexString();
   let amount = event.params.balance;
