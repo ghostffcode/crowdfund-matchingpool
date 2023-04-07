@@ -1,5 +1,6 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { PropsWithChildren } from "react";
+import { RadialSVG } from "~/components/RadialSVG";
 import { Container } from "~/components/ui/Container";
 
 import { BaseLayout } from "./BaseLayout";
@@ -7,11 +8,14 @@ import { BaseLayout } from "./BaseLayout";
 export const Layout = ({ children }: PropsWithChildren) => {
   return (
     <BaseLayout>
-      <header className="flex justify-between p-2">
+      <div className="absolute z-0 w-1/4">
+        <RadialSVG />
+      </div>
+      <header className="flex h-32 justify-between">
         <div />
-        <ConnectButton />
       </header>
-      <Container>{children}</Container>
+      <Container className="relative z-10">{children}</Container>
+      <footer className="py-32" />
     </BaseLayout>
   );
 };

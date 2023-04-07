@@ -1,49 +1,26 @@
-import { type NextPage } from "next";
+import { ethers } from "ethers";
+import { GetServerSidePropsContext, type NextPage } from "next";
 import Head from "next/head";
-import { useRouter } from "next/router";
-import { Avatar } from "~/components/ui/Avatar";
-import { Button } from "~/components/ui/Button";
-import { Link } from "~/components/ui/Link";
-import { Progress } from "~/components/ui/Progress";
-import { Stat, StatNumber, StatText } from "~/components/ui/Stat";
-import { poolMetadata } from "~/data/mock";
+
+import { MatchingPool } from "~/types";
 import { Layout } from "~/layouts/Layout";
-
-const organizers = [
-  {
-    address: "owocki.eth",
-    image: "",
-  },
-  {
-    address: "stephenreid.eth",
-    image: "",
-  },
-];
-
-const contributors = [
-  {
-    address: "supermodular.eth",
-    image: "",
-    amount: "9k",
-  },
-  {
-    address: "bliss.eth",
-    image: "",
-    amount: "1k",
-  },
-];
-
-const notImplemented = () => alert("not implemented");
-const ContributeButton = () => (
-  <Button onClick={notImplemented} className="w-full">
-    Contribute now
-  </Button>
-);
+import { ContributeButton } from "~/components/ContributeButton";
+import { Leaderboard } from "~/components/PoolLeaderboard";
+import { Organizers } from "~/components/PoolOrganizers";
+import { RaisedProgress } from "~/components/RaisedProgress";
+import { contributors, organizers, pool, poolMetadata } from "~/data/mock";
+import { PoolDetails } from "~/components/PoolDetails";
 
 const appUrl = "http://localhost:3000";
-const ViewMatchingPool: NextPage = () => {
-  const router = useRouter();
-  const address = router.query.address;
+
+const ViewMatchingPool: NextPage<MatchingPool> = ({
+  address,
+  title,
+  description,
+  funds,
+  contributors,
+  organizers,
+}) => {
   return (
     <Layout>
       <Head>
@@ -52,62 +29,41 @@ const ViewMatchingPool: NextPage = () => {
           content={`${appUrl}/api/og?poolContract=${address}`}
         />
       </Head>
-      <h1 className="mb-2 text-3xl">{poolMetadata.title}</h1>
-      <h3 className="text-xl leading-8">{poolMetadata.description}</h3>
-      <div className="pb-8" />
 
-      <div className="flex flex-col gap-8">
-        <div className="">
-          <div className="flex justify-between">
-            <Stat>
-              <StatNumber>$10k</StatNumber>
-              <StatText>raised</StatText>
-            </Stat>
-            <Stat>
-              <StatNumber>$25k</StatNumber>
-              <StatText className="text-right">goal</StatText>
-            </Stat>
-          </div>
-          <Progress size="lg" value={50} />
-        </div>
-        <ContributeButton />
-        <div className="">
-          <h4 className="mb-2 font-bold">Organized by</h4>
-          <div className="flex gap-4">
-            {organizers.map((org) => (
-              <div
-                key={org.address}
-                className="group flex flex-col items-center justify-center"
-              >
-                <Avatar className="mb-1" size="sm" color="gray" />
-                <div>{org.address}</div>
-              </div>
-            ))}
-          </div>
-        </div>
-        <div className="">
-          <h4 className="mb-2 font-bold">Leaderboard</h4>
-          <div className="flex flex-col gap-2">
-            {contributors.map((user) => (
-              <div key={user.address} className="flex p-2">
-                <Avatar size="sm" color="gray" />
-                <div className="flex flex-1 items-center justify-between pl-4">
-                  <div>{user.address}</div>
-                  <div className="font-bold">${user.amount}</div>
-                </div>
-              </div>
-            ))}
-          </div>
-          <div className="flex justify-end">
-            <Button onClick={notImplemented} variant="ghost">
-              Load more
-            </Button>
-          </div>
-        </div>
-        <ContributeButton />
+      <div className="flex flex-col gap-16">
+        <PoolDetails title={title} description={description} />
+        <Organizers organizers={organizers} />
+        <RaisedProgress funds={funds} />
+        <ContributeButton address={address} />
+        <Leaderboard contributors={contributors} />
       </div>
     </Layout>
   );
 };
+
+export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  // Fetch from subgraph or contract
+  const { goal } = pool;
+
+  // Fetch from ipfs
+  const { title, description } = poolMetadata;
+
+  // Fetch from subgraph
+  const raised = ethers.utils.parseEther(String(15_000));
+
+  return {
+    props: {
+      address: ctx.params?.address,
+      title,
+      description,
+      funds: {
+        raised: ethers.utils.formatEther(raised),
+        goal: ethers.utils.formatEther(goal),
+      },
+      organizers,
+      contributors,
+    },
+  };
+}
 
 export default ViewMatchingPool;

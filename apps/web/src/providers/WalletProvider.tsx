@@ -26,7 +26,7 @@ const connectors = connectorsForWallets([
     groupName: "App",
     wallets: [
       metaMaskWallet({ chains, shimDisconnect: true }),
-      burnerWalletConfig({ chains }),
+      // burnerWalletConfig({ chains }),
     ],
   },
 ]);

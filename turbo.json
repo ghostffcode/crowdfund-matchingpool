@@ -3,7 +3,14 @@
   "globalDependencies": ["**/.env.*local"],
   "pipeline": {
     "build": {
-      "dependsOn": ["^build", "$VERCEL_URL", "$PORT", "$NODE_ENV"],
+      "dependsOn": [
+        "^build",
+        "$VERCEL_URL",
+        "$PORT",
+        "$NODE_ENV",
+        "$NEXT_PUBLIC_ALCHEMY_ID",
+        "$NEXT_PUBLIC_WEB3_STORAGE_API_KEY"
+      ],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
     "lint": {

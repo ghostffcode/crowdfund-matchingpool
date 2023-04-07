@@ -6,10 +6,13 @@ export default {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
-      
       colors: {
-  ...colors,
-  primary: colors.indigo
+        ...colors,
+        primary: {
+          ...colors.indigo,
+          200: "#80FFBB",
+          600: "#5C4DFF",
+        },
       },
     },
   },
