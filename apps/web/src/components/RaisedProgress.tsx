@@ -9,7 +9,7 @@ export const RaisedProgress = ({ funds }: Props) => {
   const percentage = `${(+funds.raised / +funds.goal) * 100}%`;
 
   return (
-    <Wrapper>
+    <Wrapper className="text-lg">
       <ProgressBar style={{ width: percentage }} />
       <Indicator style={{ left: percentage }} />
       <CurrentValue style={{ left: percentage, transform: `translateX(-50%)` }}>
@@ -29,11 +29,10 @@ export const progressBarStyle =
 export const indicatorStyle =
   "absolute -top-2 h-16 border-2 border-r border-black/50";
 
-export const currentValueStyle =
-  "absolute top-14 text-lg font-bold text-black/50";
+export const currentValueStyle = "absolute top-14  font-bold text-black/50";
 
 export const maxValueStyle =
-  "w-full p-2 text-right text-lg font-bold text-black/50 relative z-10";
+  "w-full p-2 text-right font-bold text-black/50 relative z-10";
 
 const Wrapper = createComponent("div", tv({ base: wrapperStyle }));
 const ProgressBar = createComponent("div", tv({ base: progressBarStyle }));

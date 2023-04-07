@@ -15,17 +15,18 @@ export const config = {
   runtime: "edge",
 };
 
-async function getPoolDetails(address: string) {
-  const metadata = poolMetadata;
-  return {
-    raised: 10_000,
-    goal: 25_000,
-    metadata,
-  };
-}
+const fetchFont = (weight = "400") =>
+  fetch(
+    new URL("../../../public/inter-latin-400-normal.ttf", import.meta.url)
+  ).then((res) => res.arrayBuffer());
 
 export default async function handler(req: NextRequest) {
   try {
+    const inter400 = await fetchFont("400");
+    // Not getting font weights to work with Satori
+    // const inter600 = await fetchFont("600");
+    // const inter900 = await fetchFont("900");
+
     const { searchParams } = new URL(req.url);
     const poolAddress = searchParams.get("poolAddress");
     if (!poolAddress) return null;
@@ -71,8 +72,15 @@ export default async function handler(req: NextRequest) {
                 <span tw="text-2xl">{description}</span>
               </div>
 
-              <div tw={wrapperStyle} style={{}}>
-                <span tw={progressBarStyle} style={{ width: percentage }} />
+              <div tw={wrapperStyle + " text-3xl"} style={{}}>
+                <div
+                  tw={progressBarStyle}
+                  style={{
+                    width: percentage,
+                    backgroundImage:
+                      "linear-gradient(to right, #80FFBB, #E6FF4D)",
+                  }}
+                />
                 <span tw={indicatorStyle} style={{ left: percentage }} />
                 <span
                   tw={currentValueStyle}
@@ -80,7 +88,9 @@ export default async function handler(req: NextRequest) {
                 >
                   {formatMoney(raised)} Raised
                 </span>
-                <span tw={maxValueStyle}>{formatMoney(goal)} Goal</span>
+                <span tw={maxValueStyle + " flex justify-end"}>
+                  {formatMoney(goal)} Goal
+                </span>
               </div>
             </div>
             <div tw="flex justify-end p-1">
@@ -93,10 +103,23 @@ export default async function handler(req: NextRequest) {
         width: 1200,
         height: 630,
         // debug: true,
-        // fonts: [{
-        //   name: "Inter",
-        //   data: null
-        // }]
+        fonts: [
+          {
+            name: "Inter",
+            data: inter400,
+            weight: 400,
+          },
+          // {
+          //   name: "Inter",
+          //   data: inter600,
+          //   weight: 600
+          // },
+          // {
+          //   name: "Inter",
+          //   data: inter900,
+          //   weight: 900
+          // },
+        ],
       }
     );
   } catch (e: any) {
