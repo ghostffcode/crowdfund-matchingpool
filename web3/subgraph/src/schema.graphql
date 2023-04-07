@@ -1,0 +1,31 @@
+type Crowdfund @entity {
+  id: ID!
+  creator: User!
+  token: Bytes!
+  startsAt: BigInt!
+  endsAt: BigInt!
+  goal: BigInt!
+  metaPtr: String!
+  canRefund: Boolean!
+  createdAt: BigInt!
+  totalDonations: BigInt!
+  funded: BigInt!
+  donations: [Donor!]! @derivedFrom(field: "crowdfund")
+  transactionHash: String!
+}
+
+type User @entity {
+  id: ID!
+  address: Bytes!
+  createdAt: BigInt!
+  donations: [Donor!] @derivedFrom(field: "user")
+}
+
+type Donor @entity {
+  id: ID!
+  user: User!
+  amount: BigInt!
+  balance: BigInt!
+  crowdfund: Crowdfund!
+  createdAt: BigInt!
+}
