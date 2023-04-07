@@ -9,9 +9,10 @@ import { Organizers } from "~/components/PoolOrganizers";
 import { RaisedProgress } from "~/components/RaisedProgress";
 import { contributors, organizers, pool, poolMetadata } from "~/data/mock";
 import { PoolDetails } from "~/components/PoolDetails";
-import { getBaseUrl } from "~/utils/api";
 
-const appUrl = getBaseUrl();
+const appUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}`
+  : "http://localhost:3000";
 
 const ViewMatchingPool: NextPage<MatchingPool> = ({
   address,
