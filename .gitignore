@@ -31,3 +31,14 @@ yarn-error.log*
 
 # turbo
 .turbo
+
+web3/subgraph/generated
+web3/subgraph/abis/*
+web3/hardhat/*.txt
+
+web3/hardhat/artifacts*
+web3/hardhat/deployments
+web3/hardhat/cache*
+web3/**/data
+
+web3/subgraph/config/config.json
