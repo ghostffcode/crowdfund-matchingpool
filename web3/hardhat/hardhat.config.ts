@@ -314,15 +314,26 @@ const config = {
       // add other network's API key here
     },
   },
-  abiExporter: {
-    path: '../../apps/web/contracts/ABI',
-    runOnCompile: true,
-    clear: true,
-    flat: true,
-    only: [],
-    spacing: 2,
-    pretty: false,
-  },
+  abiExporter: [
+    {
+      path: '../../apps/web/contracts/ABI',
+      runOnCompile: true,
+      clear: true,
+      flat: true,
+      only: [],
+      spacing: 2,
+      pretty: false,
+    },
+    {
+      path: '../subgraph/abis',
+      runOnCompile: true,
+      clear: true,
+      flat: true,
+      only: [],
+      spacing: 2,
+      pretty: false,
+    },
+  ]
 }
 
 function debug(text: string) {
