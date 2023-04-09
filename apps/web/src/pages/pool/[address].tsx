@@ -13,10 +13,10 @@ import { PoolDetails } from "~/components/PoolDetails";
 import { useState } from "react";
 import { ContributeForm } from "~/components/ContributeForm";
 import { Button } from "~/components/ui/Button";
+import site from "~/config/site";
 
-const appUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}.vercel.app`
-  : "http://localhost:3000";
+const appUrl =
+  process.env.NODE_ENV === "production" ? site.url : "http://localhost:3000";
 
 const ViewMatchingPool: NextPage<MatchingPool> = ({
   address,
