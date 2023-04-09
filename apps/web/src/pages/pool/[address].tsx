@@ -14,10 +14,9 @@ import { useState } from "react";
 import { ContributeForm } from "~/components/ContributeForm";
 import { Button } from "~/components/ui/Button";
 
-const appUrl =
-  process.env.NODE_ENV === "production"
-    ? `https://crowdfund-matchingpool.vercel.app`
-    : "http://localhost:3000";
+const appUrl = process.env.VERCEL_URL
+  ? `https://${process.env.VERCEL_URL}.vercel.app`
+  : "http://localhost:3000";
 
 const ViewMatchingPool: NextPage<MatchingPool> = ({
   address,

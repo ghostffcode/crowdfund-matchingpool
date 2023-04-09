@@ -22,14 +22,16 @@ const fetchFont = (weight = "400") =>
 
 export default async function handler(req: NextRequest) {
   try {
+    const { searchParams } = new URL(req.url);
+    const poolAddress = searchParams.get("poolAddress");
+    if (!poolAddress) {
+      throw new Error("No crowdfund address provided");
+    }
+
     const inter400 = await fetchFont("400");
     // Not getting font weights to work with Satori
     // const inter600 = await fetchFont("600");
     // const inter900 = await fetchFont("900");
-
-    const { searchParams } = new URL(req.url);
-    const poolAddress = searchParams.get("poolAddress");
-    if (!poolAddress) return null;
 
     const { goal } = pool;
 
