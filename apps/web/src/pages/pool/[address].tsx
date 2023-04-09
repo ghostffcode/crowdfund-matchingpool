@@ -1,4 +1,6 @@
 import { GetServerSidePropsContext, type NextPage } from "next";
+import { request, gql } from "graphql-request";
+
 import Head from "next/head";
 
 import { MatchingPool } from "~/types";
@@ -12,9 +14,10 @@ import { useState } from "react";
 import { ContributeForm } from "~/components/ContributeForm";
 import { Button } from "~/components/ui/Button";
 
-const appUrl = process.env.VERCEL_URL
-  ? `https://${process.env.VERCEL_URL}`
-  : "http://localhost:3000";
+const appUrl =
+  process.env.NODE_ENV === "production"
+    ? `https://crowdfund-matchingpool.vercel.app`
+    : "http://localhost:3000";
 
 const ViewMatchingPool: NextPage<MatchingPool> = ({
   address,
@@ -65,6 +68,8 @@ const ViewMatchingPool: NextPage<MatchingPool> = ({
 };
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  const address = ctx.params?.address as string;
+
   // Fetch from subgraph or contract
   const { goal } = pool;
 
@@ -74,10 +79,15 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   // Fetch from subgraph
   const raised = "15000";
   const token = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
-
+  try {
+    const crowdfund = await queryCrowdfund(address);
+    console.log(crowdfund);
+  } catch (error) {
+    console.log(error);
+  }
   return {
     props: {
-      address: ctx.params?.address,
+      address,
       title,
       description,
       token,
@@ -89,6 +99,29 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
       contributors,
     },
   };
+}
+
+async function queryCrowdfund(address: string) {
+  const subgraphUrl = process.env.SUBGRAPH_URL || "";
+  return request(
+    subgraphUrl,
+    gql`
+      query getCrowdfund($id: ID!) {
+        Crowdfund(id: $id) {
+          token
+          metaPtr
+          totalDonations
+          donations {
+            amount
+            balance
+            user {
+              id
+            }
+          }
+        }
+      }
+    `
+  );
 }
 
 export default ViewMatchingPool;
