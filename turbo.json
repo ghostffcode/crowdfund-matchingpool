@@ -9,7 +9,8 @@
         "$PORT",
         "$NODE_ENV",
         "$NEXT_PUBLIC_ALCHEMY_ID",
-        "$NEXT_PUBLIC_WEB3_STORAGE_API_KEY"
+        "$NEXT_PUBLIC_WEB3_STORAGE_API_KEY",
+        "$SUBGRAPH_URL"
       ],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
