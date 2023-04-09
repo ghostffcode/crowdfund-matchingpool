@@ -1,10 +1,12 @@
-type Metadata = { title: string; description: string };
+import { Address } from "wagmi";
 
 export type Organizer = { address: string };
 export type Contributor = { address: string; amount: string };
 export type Funds = { raised: string; goal: string; percentage: number };
+
 export type MatchingPool = {
-  address: string;
+  address: Address;
+  token: Address;
   title: string;
   description: string;
   funds: Funds;
