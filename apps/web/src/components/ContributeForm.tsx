@@ -5,6 +5,7 @@ import { utils } from "ethers";
 import { useAllowance, useApprove } from "~/hooks/useERC20";
 import { Button } from "./ui/Button";
 import { useDonate } from "~/hooks/usePool";
+import ConnectWalletButton from "./ConnectWalletButton";
 
 type Props = { token: Address; address: Address; onSuccess: () => void };
 
@@ -65,7 +66,12 @@ export const ContributeForm = ({ token, address, onSuccess }: Props) => {
         </div>
       </div>
       {!account.address ? (
-        <span>You must connect your wallet to contribute.</span>
+        <div>
+          <ConnectWalletButton />
+          <div className="pt-2 text-center">
+            You must connect your wallet to contribute to a matching pool.
+          </div>
+        </div>
       ) : hasAllowance ? (
         <Button
           type="submit"

@@ -14,9 +14,7 @@ export const Layout = ({ children }: PropsWithChildren) => {
       </div>
       <header className="flex h-32 justify-between p-2">
         <div />
-        <div>
-          <ConnectWalletButton />
-        </div>
+        <div></div>
       </header>
       <Container className="relative z-10">{children}</Container>
       <footer className="py-32" />

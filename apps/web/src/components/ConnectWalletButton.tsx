@@ -12,7 +12,7 @@ export const ConnectWalletButton = ({
 
   // Auto-connect burner wallet
   useEffect(() => {
-    !isLoading && !isConnected && connect({ connector: connectors[0] });
+    // !isLoading && !isConnected && connect({ connector: connectors[0] });
   }, []);
 
   return (
