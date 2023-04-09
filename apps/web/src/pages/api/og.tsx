@@ -23,8 +23,8 @@ const fetchFont = (weight = "400") =>
 export default async function handler(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
-    const poolAddress = searchParams.get("poolAddress");
-    if (!poolAddress) {
+    const crowdfundAddress = searchParams.get("crowdfundAddress");
+    if (!crowdfundAddress) {
       throw new Error("No crowdfund address provided");
     }
 

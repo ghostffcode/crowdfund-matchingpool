@@ -29,7 +29,7 @@ const ViewMatchingPool: NextPage<MatchingPool> = ({
 }) => {
   const [isOpen, setOpen] = useState(false);
 
-  const ogImage = `${appUrl}/api/og?poolContract=${address}`;
+  const ogImage = `${appUrl}/api/og?crowdfundAddress=${address}`;
   return (
     <Layout>
       <Head>
