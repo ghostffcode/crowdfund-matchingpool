@@ -1,6 +1,5 @@
 import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { PropsWithChildren } from "react";
-import ConnectWalletButton from "~/components/ConnectWalletButton";
 import { RadialSVG } from "~/components/RadialSVG";
 import { Container } from "~/components/ui/Container";
 

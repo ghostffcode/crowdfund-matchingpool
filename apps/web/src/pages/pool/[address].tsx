@@ -29,13 +29,14 @@ const ViewMatchingPool: NextPage<MatchingPool> = ({
 }) => {
   const [isOpen, setOpen] = useState(false);
 
+  const ogImage = `${appUrl}/api/og?poolContract=${address}`;
   return (
     <Layout>
       <Head>
-        <meta
-          property="og:image"
-          content={`${appUrl}/api/og?poolContract=${address}`}
-        />
+        <meta property="og:image" content={ogImage} />
+        <meta property="twitter:image" content={ogImage} />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
       </Head>
 
       <div className="flex flex-col gap-16">
