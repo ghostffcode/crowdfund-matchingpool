@@ -29,7 +29,7 @@ export const Avatar = ({ src = "", alt = "", ...props }) => (
   <Wrapper {...props}>
     <Image
       as={RadixAvatar.Image}
-      className="object-cover object-center"
+      className="rounded-full object-cover object-center"
       src={src}
       alt={alt}
     />

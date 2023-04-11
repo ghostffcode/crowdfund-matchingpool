@@ -6,10 +6,16 @@ import { ethers } from "ethers";
 
 type Props = { token: Address; goal: string; totalDonations: string };
 
+const isNativeToken = (address: string) => Boolean(Number(address));
+
 export const RaisedProgress = ({ token, goal, totalDonations }: Props) => {
   const percentage = `${(+totalDonations / +goal) * 100}%`;
 
-  const { data } = useToken({ address: token, enabled: Boolean(token) });
+  console.log(isNativeToken(token));
+  const { data } = useToken({
+    address: token,
+    enabled: !isNativeToken(token),
+  });
 
   const formatted = (val: string) =>
     ethers.utils.formatUnits(val, data?.decimals);
@@ -19,9 +25,9 @@ export const RaisedProgress = ({ token, goal, totalDonations }: Props) => {
       <ProgressBar style={{ width: percentage }} />
       <Indicator style={{ left: percentage }} />
       <CurrentValue style={{ left: percentage, transform: `translateX(-50%)` }}>
-        {formatMoney(formatted(totalDonations))} Raised
+        {formatMoney(totalDonations)} Raised
       </CurrentValue>
-      <MaxValue>{formatMoney(formatted(goal))} Goal</MaxValue>
+      <MaxValue>{formatMoney(goal)} Goal</MaxValue>
     </Wrapper>
   );
 };

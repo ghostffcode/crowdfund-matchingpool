@@ -1,5 +1,7 @@
+import { Address } from "wagmi";
 import { Organizer } from "~/types";
-import { Avatar } from "./ui/Avatar";
+import { EnsAvatar } from "./EnsAvatar";
+import { EnsName } from "./EnsName";
 
 type Props = { organizers: Organizer[] };
 
@@ -14,8 +16,15 @@ export const Organizers = ({ organizers = [] }: Props) => {
               key={org.address}
               className="group flex flex-col items-center justify-center"
             >
-              <Avatar className="mb-1" color="gray" />
-              <div className="text-lg font-bold">{org.address}</div>
+              <EnsAvatar
+                address={org.address as Address}
+                className="mb-1"
+                color="gray"
+                size="md"
+              />
+              <div className="text-lg font-bold">
+                <EnsName address={org.address as Address} />
+              </div>
             </div>
           ))}
         </div>

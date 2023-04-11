@@ -8,6 +8,7 @@ const crowdfundQuery = gql/* GraphQL */ `
       }
       token
       metaPtr
+      goal
       totalDonations
       donations(
         first: $first

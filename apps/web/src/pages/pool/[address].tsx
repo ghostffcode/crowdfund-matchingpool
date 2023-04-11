@@ -83,6 +83,8 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
     };
   }
 
+  console.log(crowdfund);
+
   const metadata = (await fetchIpfs(crowdfund.metaPtr)) || poolMetadata;
 
   return {
