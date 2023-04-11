@@ -1,4 +1,5 @@
 import { Address, useEnsName } from "wagmi";
+import { Skeleton } from "./ui/Skeleton";
 
 export const EnsName = ({ address }: { address: Address }) => {
   const ens = useEnsName({
@@ -7,5 +8,5 @@ export const EnsName = ({ address }: { address: Address }) => {
     chainId: 1, // Resolve ENS on mainnet
   });
 
-  return <>{ens.data || address}</>;
+  return <Skeleton isLoading={ens.isLoading}>{ens.data || address}</Skeleton>;
 };
