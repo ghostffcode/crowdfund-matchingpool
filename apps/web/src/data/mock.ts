@@ -1,13 +1,5 @@
 import { ethers } from "ethers";
 
-// Data from contract
-export const pool = {
-  owner: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-  token: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
-  metadata: "ipfsHash",
-  goal: "35000",
-};
-
 // Data from ipfs metadata
 export const poolMetadata = {
   title: "Metacrisis.xyz Matching Round",
@@ -17,14 +9,24 @@ export const poolMetadata = {
 
 // Address could be just an 0x123 and we can resolve the ENS name and Avatar on the client
 export const organizers = [
-  { address: "owocki.eth", image: "" },
-  { address: "stephenreid.eth", image: "" },
-  { address: "octav.eth", image: "" },
+  { user: { address: "owocki.eth" }, image: "" },
+  { user: { address: "stephenreid.eth" }, image: "" },
+  { user: { address: "octav.eth" }, image: "" },
 ];
 
 // again, image might not be necessary if we resolve on client
 export const contributors = [
-  { address: "supermodular.eth", image: "", amount: "9000" },
-  { address: "bliss.eth", image: "", amount: "9000" },
-  { address: "noyesno.eth", image: "", amount: "200" },
+  { user: { address: "supermodular.eth" }, image: "", amount: "9000" },
+  { user: { address: "bliss.eth" }, image: "", amount: "9000" },
+  { user: { address: "noyesno.eth" }, image: "", amount: "200" },
 ];
+
+// Data from contract
+export const pool = {
+  creator: { address: "0x5FbDB2315678afecb367f032d93F642f64180aa3" },
+  token: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  metaPtr: "ipfsHash",
+  goal: ethers.utils.parseEther("35000").toString(),
+  totalDonations: ethers.utils.parseEther("25000").toString(),
+  donations: contributors,
+};

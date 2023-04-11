@@ -1,23 +1,22 @@
-import { Contributor } from "~/types";
 import { formatMoney } from "~/utils/currency";
-import { Avatar } from "./ui/Avatar";
+import { EnsAvatar } from "./EnsAvatar";
+import { EnsName } from "./EnsName";
 import { Button } from "./ui/Button";
 
-export const Leaderboard = ({
-  contributors = [],
-}: {
-  contributors: Contributor[];
-}) => {
+export const Leaderboard = ({ donations = [] }: { donations: any[] }) => {
   return (
     <section>
       <h4 className="mb-2 text-xl font-bold">Leaderboard</h4>
       <div className="mb-4 flex flex-col divide-y divide-solid">
-        {contributors.map((user) => (
-          <div key={user.address} className="flex  border-black/80 py-6">
-            <Avatar size="sm" color="gray" />
+        {donations.map((donation) => (
+          <div
+            key={donation.user.address}
+            className="flex  border-black/80 py-6"
+          >
+            <EnsAvatar address={donation.user.address} size="sm" color="gray" />
             <div className="flex flex-1 items-center justify-between pl-4">
-              <div>{user.address}</div>
-              <div className="">${formatMoney(user.amount)}</div>
+              <EnsName address={donation.user.address} />
+              <div className="">${formatMoney(donation.amount)}</div>
             </div>
           </div>
         ))}

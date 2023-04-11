@@ -1,35 +1,37 @@
 import { GetServerSidePropsContext, type NextPage } from "next";
-import { request, gql } from "graphql-request";
-
 import Head from "next/head";
 
+import site from "~/config/site";
 import { MatchingPool } from "~/types";
 import { Layout } from "~/layouts/Layout";
 import { Leaderboard } from "~/components/PoolLeaderboard";
 import { Organizers } from "~/components/PoolOrganizers";
 import { RaisedProgress } from "~/components/RaisedProgress";
-import { contributors, organizers, pool, poolMetadata } from "~/data/mock";
+import { pool, poolMetadata } from "~/data/mock";
 import { PoolDetails } from "~/components/PoolDetails";
 import { useState } from "react";
 import { ContributeForm } from "~/components/ContributeForm";
 import { Button } from "~/components/ui/Button";
-import site from "~/config/site";
+import { fetchIpfs } from "~/utils/ipfs";
+import { queryCrowdfund } from "~/hooks/useCrowdfund";
+import { Address } from "wagmi";
 
 const appUrl =
   process.env.NODE_ENV === "production" ? site.url : "http://localhost:3000";
 
-const ViewMatchingPool: NextPage<MatchingPool> = ({
+const ViewMatchingPool: NextPage<{ address: string } & MatchingPool> = ({
   address,
   title,
   description,
   token,
-  funds,
-  contributors,
+  goal,
+  totalDonations,
   organizers,
+  donations,
 }) => {
   const [isOpen, setOpen] = useState(false);
-
   const ogImage = `${appUrl}/api/og?crowdfundAddress=${address}`;
+
   return (
     <Layout>
       <Head>
@@ -42,12 +44,16 @@ const ViewMatchingPool: NextPage<MatchingPool> = ({
       <div className="flex flex-col gap-16">
         <PoolDetails title={title} description={description} />
         <Organizers organizers={organizers} />
-        <RaisedProgress funds={funds} />
+        <RaisedProgress
+          token={token}
+          goal={goal}
+          totalDonations={totalDonations}
+        />
         {isOpen ? (
           <div className="bg-white p-8 shadow-xl">
             <ContributeForm
               token={token}
-              address={address}
+              address={address as Address}
               onSuccess={() => setOpen(false)}
             />
           </div>
@@ -61,7 +67,7 @@ const ViewMatchingPool: NextPage<MatchingPool> = ({
             Contribute now
           </Button>
         )}
-        <Leaderboard contributors={contributors} />
+        <Leaderboard donations={donations} />
       </div>
     </Layout>
   );
@@ -70,58 +76,23 @@ const ViewMatchingPool: NextPage<MatchingPool> = ({
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
   const address = ctx.params?.address as string;
 
-  // Fetch from subgraph or contract
-  const { goal } = pool;
-
-  // Fetch from ipfs
-  const { title, description } = poolMetadata;
-
-  // Fetch from subgraph
-  const raised = "15000";
-  const token = "0xe7f1725E7734CE288F8367e1Bb143E90bb3F0512";
-  try {
-    const crowdfund = await queryCrowdfund(address);
-    console.log(crowdfund);
-  } catch (error) {
-    console.log(error);
+  const crowdfund = (await queryCrowdfund({ address })) || pool;
+  if (!crowdfund) {
+    return {
+      notFound: true,
+    };
   }
+
+  const metadata = (await fetchIpfs(crowdfund.metaPtr)) || poolMetadata;
+
   return {
     props: {
       address,
-      title,
-      description,
-      token,
-      funds: {
-        raised,
-        goal,
-      },
-      organizers,
-      contributors,
+      ...metadata,
+      ...crowdfund,
+      organizers: [crowdfund.creator],
     },
   };
-}
-
-async function queryCrowdfund(address: string) {
-  const subgraphUrl = process.env.SUBGRAPH_URL || "";
-  return request(
-    subgraphUrl,
-    gql`
-      query getCrowdfund($id: ID!) {
-        Crowdfund(id: $id) {
-          token
-          metaPtr
-          totalDonations
-          donations {
-            amount
-            balance
-            user {
-              id
-            }
-          }
-        }
-      }
-    `
-  );
 }
 
 export default ViewMatchingPool;

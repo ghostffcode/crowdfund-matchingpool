@@ -1,21 +1,27 @@
-import { Funds } from "~/types";
 import { createComponent } from "./ui";
 import { tv } from "tailwind-variants";
 import { formatMoney } from "~/utils/currency";
+import { Address, useToken } from "wagmi";
+import { ethers } from "ethers";
 
-type Props = { funds: Funds };
+type Props = { token: Address; goal: string; totalDonations: string };
 
-export const RaisedProgress = ({ funds }: Props) => {
-  const percentage = `${(+funds.raised / +funds.goal) * 100}%`;
+export const RaisedProgress = ({ token, goal, totalDonations }: Props) => {
+  const percentage = `${(+totalDonations / +goal) * 100}%`;
+
+  const { data } = useToken({ address: token, enabled: Boolean(token) });
+
+  const formatted = (val: string) =>
+    ethers.utils.formatUnits(val, data?.decimals);
 
   return (
     <Wrapper className="text-lg">
       <ProgressBar style={{ width: percentage }} />
       <Indicator style={{ left: percentage }} />
       <CurrentValue style={{ left: percentage, transform: `translateX(-50%)` }}>
-        {formatMoney(funds.raised)} Raised
+        {formatMoney(formatted(totalDonations))} Raised
       </CurrentValue>
-      <MaxValue>{formatMoney(funds.goal)} Goal</MaxValue>
+      <MaxValue>{formatMoney(formatted(goal))} Goal</MaxValue>
     </Wrapper>
   );
 };

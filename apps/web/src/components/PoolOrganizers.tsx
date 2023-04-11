@@ -12,7 +12,7 @@ export const Organizers = ({ organizers = [] }: Props) => {
           {organizers.map((org) => (
             <div
               key={org.address}
-              className="group flex w-28 flex-col items-center justify-center"
+              className="group flex flex-col items-center justify-center"
             >
               <Avatar className="mb-1" color="gray" />
               <div className="text-lg font-bold">{org.address}</div>

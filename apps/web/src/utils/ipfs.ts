@@ -15,3 +15,12 @@ export const ipfsUpload = async (
   }
   return ipfsClient.put([file]).then((cid: string) => `${cid}/${file.name}`);
 };
+
+export const fetchIpfs = async (cid: string) => {
+  const ipfsGateway =
+    process.env.NEXT_PUBLIC_IPFS_GATEWAY || "https://w3s.link/ipfs/";
+
+  return fetch(`${ipfsGateway}${cid}`, {
+    headers: { "content-type": "application/json" },
+  }).then((r) => (r.ok ? r.json() : null));
+};
