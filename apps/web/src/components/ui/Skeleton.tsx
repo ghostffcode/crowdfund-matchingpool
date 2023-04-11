@@ -9,7 +9,7 @@ export const Skeleton = ({
   isLoading ? (
     <span
       className={clsx(
-        "relative top-0.5 inline-flex h-3 min-w-[24px] flex-1 animate-pulse items-center bg-gray-200",
+        "relative top-0.5 inline-flex h-3 min-w-[24px] flex-1 animate-pulse items-center bg-black/50",
         className
       )}
     />

@@ -8,5 +8,9 @@ export const EnsName = ({ address }: { address: Address }) => {
     chainId: 1, // Resolve ENS on mainnet
   });
 
-  return <Skeleton isLoading={ens.isLoading}>{ens.data || address}</Skeleton>;
+  return (
+    <Skeleton className="w-24" isLoading={ens.isLoading}>
+      {ens.data || address}
+    </Skeleton>
+  );
 };
