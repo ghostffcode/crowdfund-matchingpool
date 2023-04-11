@@ -10,13 +10,16 @@
         "$NODE_ENV",
         "$NEXT_PUBLIC_ALCHEMY_ID",
         "$NEXT_PUBLIC_WEB3_STORAGE_API_KEY",
-        "$SUBGRAPH_URL"
+        "$SUBGRAPH_URL",
+        "$NEXT_PUBLIC_IPFS_GATEWAY",
+        "$NEXT_PUBLIC_SUBGRAPH_URL"
       ],
       "outputs": ["dist/**", ".next/**", "!.next/cache/**"]
     },
     "lint": {
       "outputs": []
     },
+    "codegen": {},
     "dev": {
       "cache": false
     }
