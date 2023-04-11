@@ -1,4 +1,4 @@
-import { request, gql } from "graphql-request";
+import { request, gql, GraphQLClient } from "graphql-request";
 
 const crowdfundQuery = gql/* GraphQL */ `
   query getCrowdfund($address: ID!, $first: Int, $skip: Int) {
@@ -36,15 +36,13 @@ export async function queryCrowdfund({
   skip?: number;
 }) {
   const subgraphUrl = process.env.NEXT_PUBLIC_SUBGRAPH_URL || "";
-  const { crowdfund } = await request<{ crowdfund: any }>(
-    subgraphUrl,
-    crowdfundQuery,
-    {
-      address,
-      first,
-      skip,
-    }
-  );
+  const { crowdfund } = await new GraphQLClient(subgraphUrl, {
+    fetch,
+  }).request<{ crowdfund: any }>(crowdfundQuery, {
+    address,
+    first,
+    skip,
+  });
   return crowdfund;
 }
 

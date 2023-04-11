@@ -9,10 +9,21 @@ import {
   wrapperStyle,
 } from "~/components/RaisedProgress";
 import { pool, poolMetadata } from "~/data/mock";
+import { queryCrowdfund } from "~/hooks/useCrowdfund";
 import { formatMoney } from "~/utils/currency";
 
 export const config = {
   runtime: "edge",
+};
+
+// Duplicate of utils/ifps
+const fetchMetadata = async (cid: string) => {
+  const ipfsGateway =
+    process.env.NEXT_PUBLIC_IPFS_GATEWAY || "https://w3s.link/ipfs/";
+
+  return fetch(`${ipfsGateway}${cid}`, {
+    headers: { "content-type": "application/json" },
+  }).then((r) => (r.ok ? r.json() : null));
 };
 
 const fetchFont = (weight = "400") =>
@@ -23,25 +34,27 @@ const fetchFont = (weight = "400") =>
 export default async function handler(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
-    const crowdfundAddress = searchParams.get("crowdfundAddress");
-    if (!crowdfundAddress) {
+    const address = searchParams.get("crowdfundAddress");
+    if (!address) {
       throw new Error("No crowdfund address provided");
     }
+    const crowdfund = (await queryCrowdfund({ address })) || pool;
+    if (!crowdfund) {
+      throw new Error("No crowdfund found");
+    }
+
+    const metadata = (await fetchMetadata(crowdfund.metaPtr)) || poolMetadata;
 
     const inter400 = await fetchFont("400");
     // Not getting font weights to work with Satori
     // const inter600 = await fetchFont("600");
     // const inter900 = await fetchFont("900");
 
-    const { goal } = pool;
-
+    const { goal = "0", totalDonations = "0" } = crowdfund;
     // Fetch from ipfs
     const { title, description } = poolMetadata;
 
-    // Fetch from subgraph
-    const raised = "15000";
-
-    const percentage = `${(+raised / +goal) * 100}%`;
+    const percentage = `${(+"0" / +goal) * 100}%`;
 
     return new ImageResponse(
       (
@@ -88,7 +101,7 @@ export default async function handler(req: NextRequest) {
                   tw={currentValueStyle}
                   style={{ left: percentage, transform: `translateX(-50%)` }}
                 >
-                  {formatMoney(raised)} Raised
+                  {formatMoney(totalDonations)} Raised
                 </span>
                 <span tw={maxValueStyle + " flex justify-end"}>
                   {formatMoney(goal)} Goal

@@ -17,6 +17,7 @@ export const ipfsUpload = async (
 };
 
 export const fetchIpfs = async (cid: string) => {
+  if (!cid) return null;
   const ipfsGateway =
     process.env.NEXT_PUBLIC_IPFS_GATEWAY || "https://w3s.link/ipfs/";
 
