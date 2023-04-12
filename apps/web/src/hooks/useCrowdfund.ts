@@ -6,6 +6,7 @@ const crowdfundQuery = gql/* GraphQL */ `
       creator {
         address
       }
+      safe
       token
       metaPtr
       goal
