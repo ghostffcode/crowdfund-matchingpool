@@ -26,12 +26,24 @@ const ViewMatchingPool: NextPage<{ address: string } & MatchingPool> = ({
   token,
   goal,
   totalDonations,
-  organizers,
+  safe,
   donations,
+  ...rest
 }) => {
   const [isOpen, setOpen] = useState(false);
   const ogImage = `${appUrl}/api/og?crowdfundAddress=${address}`;
 
+  console.log({
+    address,
+    title,
+    description,
+    token,
+    goal,
+    totalDonations,
+    safe,
+    donations,
+    ...rest,
+  });
   return (
     <Layout>
       <Head>
@@ -43,7 +55,7 @@ const ViewMatchingPool: NextPage<{ address: string } & MatchingPool> = ({
 
       <div className="flex flex-col gap-16">
         <PoolDetails title={title} description={description} />
-        <Organizers organizers={organizers} />
+        <Organizers safe={safe} />
         <RaisedProgress
           token={token}
           goal={goal}
@@ -82,8 +94,6 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
       notFound: true,
     };
   }
-
-  console.log(crowdfund);
 
   const metadata = (await fetchIpfs(crowdfund.metaPtr)) || poolMetadata;
 

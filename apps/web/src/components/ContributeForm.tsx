@@ -1,11 +1,12 @@
 import { useForm } from "react-hook-form";
 import { Address, useAccount, useBalance } from "wagmi";
-import { utils } from "ethers";
+import { ethers, utils } from "ethers";
 
 import { useAllowance, useApprove } from "~/hooks/useERC20";
 import { Button } from "./ui/Button";
 import { useDonate } from "~/hooks/usePool";
 import ConnectWalletButton from "./ConnectWalletButton";
+import { isNativeToken } from "~/utils/token";
 
 type Props = { token: Address; address: Address; onSuccess: () => void };
 
@@ -13,28 +14,40 @@ export const ContributeForm = ({ token, address, onSuccess }: Props) => {
   const form = useForm();
   const account = useAccount();
 
-  const balance = useBalance({ address: account.address, token });
+  const balance = useBalance({
+    address: account.address,
+    token: !isNativeToken(token) ? token : undefined,
+  });
   const allowance = useAllowance({
     token,
     owner: account.address as Address,
     spender: address,
   });
 
-  const { symbol, decimals, formatted } = balance.data || {};
+  const { symbol = "ETH", decimals, formatted } = balance.data || {};
   const amount = utils.parseUnits(form.watch("amount") || "0", decimals);
 
   const approve = useApprove({ token, spender: address, amount });
 
   const donate = useDonate(address, onSuccess);
 
-  const hasAllowance = amount.gt(0) && allowance.data?.gte(amount);
+  const hasAllowance =
+    isNativeToken(token) || (amount.gt(0) && allowance.data?.gte(amount));
   const isLoading = allowance.isLoading || approve.isLoading;
 
+  const error = approve.error || donate.error;
   return (
     <form
       onSubmit={form.handleSubmit((values) => {
         if (hasAllowance) {
-          donate.write({ recklesslySetUnpreparedArgs: [amount] });
+          console.log("fund");
+          donate.write({
+            recklesslySetUnpreparedArgs: [amount],
+            // Add amount to msg.value if ETH
+            recklesslySetUnpreparedOverrides: isNativeToken(token)
+              ? { value: amount }
+              : undefined,
+          });
         } else {
           approve.write?.();
         }
@@ -46,6 +59,7 @@ export const ContributeForm = ({ token, address, onSuccess }: Props) => {
             type="number"
             min={0}
             max={Number(formatted)}
+            step={0.000001}
             placeholder="0"
             autoFocus
             className="block w-full bg-transparent p-4 text-xl outline-none"
@@ -56,7 +70,7 @@ export const ContributeForm = ({ token, address, onSuccess }: Props) => {
           </div>
         </div>
         <div className="flex justify-between">
-          <div>
+          <div className={isNativeToken(token) ? "invisible" : ""}>
             Allowance: {utils.formatUnits(allowance.data || "0", decimals)}{" "}
             {symbol}
           </div>
@@ -91,6 +105,9 @@ export const ContributeForm = ({ token, address, onSuccess }: Props) => {
           {isLoading ? "Approving..." : "Approve"}
         </Button>
       )}
+      {error ? (
+        <div className="pt-4 text-center text-red-500">{error.message}</div>
+      ) : null}
     </form>
   );
 };

@@ -6,7 +6,7 @@ import {
 } from "@rainbow-me/rainbowkit";
 import { metaMaskWallet } from "@rainbow-me/rainbowkit/wallets";
 import { configureChains, createClient, mainnet, WagmiConfig } from "wagmi";
-import { polygon } from "wagmi/chains";
+import { polygon, goerli } from "wagmi/chains";
 import { alchemyProvider } from "wagmi/providers/alchemy";
 import { publicProvider } from "wagmi/providers/public";
 
@@ -14,7 +14,7 @@ import { burnerWalletConfig } from "~/providers/burner-wallet/config";
 import { PropsWithChildren } from "react";
 
 const { chains, provider } = configureChains(
-  [polygon, mainnet],
+  [goerli, polygon, mainnet],
   [
     alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID as string }),
     publicProvider(),

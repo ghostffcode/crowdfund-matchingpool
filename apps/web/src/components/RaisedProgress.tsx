@@ -3,15 +3,13 @@ import { tv } from "tailwind-variants";
 import { formatMoney } from "~/utils/currency";
 import { Address, useToken } from "wagmi";
 import { ethers } from "ethers";
+import { isNativeToken } from "~/utils/token";
 
 type Props = { token: Address; goal: string; totalDonations: string };
-
-const isNativeToken = (address: string) => Boolean(Number(address));
 
 export const RaisedProgress = ({ token, goal, totalDonations }: Props) => {
   const percentage = `${(+totalDonations / +goal) * 100}%`;
 
-  console.log(isNativeToken(token));
   const { data } = useToken({
     address: token,
     enabled: !isNativeToken(token),
@@ -25,15 +23,15 @@ export const RaisedProgress = ({ token, goal, totalDonations }: Props) => {
       <ProgressBar style={{ width: percentage }} />
       <Indicator style={{ left: percentage }} />
       <CurrentValue style={{ left: percentage, transform: `translateX(-50%)` }}>
-        {formatMoney(totalDonations)} Raised
+        {formatMoney(formatted(totalDonations))} Raised
       </CurrentValue>
-      <MaxValue>{formatMoney(goal)} Goal</MaxValue>
+      <MaxValue>{formatMoney(formatted(goal))} Goal</MaxValue>
     </Wrapper>
   );
 };
 
 export const wrapperStyle =
-  "flex mb-6 w-full border-2 border-black/50 relative";
+  "flex mb-6 w-full border-2 border-black/50 relative bg-[#FFE767]";
 
 export const progressBarStyle =
   "absolute h-full bg-gradient-to-r from-[#80FFBB] to-[#E6FF4D]";
