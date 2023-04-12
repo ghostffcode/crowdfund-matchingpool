@@ -1,6 +1,6 @@
 import { ImageResponse } from "@vercel/og";
 import { NextRequest } from "next/server";
-import { RadialSVG } from "~/components/RadialSVG";
+import { RadialSVG, RadialSVGRight } from "~/components/RadialSVG";
 import {
   currentValueStyle,
   indicatorStyle,
@@ -31,6 +31,9 @@ const fetchFont = (weight = "400") =>
     new URL("../../../public/inter-latin-400-normal.ttf", import.meta.url)
   ).then((res) => res.arrayBuffer());
 
+const truncate = (str = "", maxLength = Infinity) => {
+  return str.length >= maxLength ? str.slice(0, maxLength) + "..." : str;
+};
 export default async function handler(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
@@ -70,21 +73,21 @@ export default async function handler(req: NextRequest) {
           }}
         >
           <div tw="bg-[#FFE767] w-full h-full flex flex-col justify-between relative">
-            <div
-              tw="flex absolute"
-              style={{
-                width: 444,
-                height: 845,
-              }}
-            >
+            <div tw="flex absolute" style={{ width: 444, height: 845 }}>
               <RadialSVG />
             </div>
-            <div tw="flex flex-col pl-64 pr-32 pt-32">
+            <div
+              tw="flex absolute right-0 -bottom-72"
+              style={{ width: 444, height: 845 }}
+            >
+              <RadialSVGRight />
+            </div>
+            <div tw="flex flex-col pl-80 pr-32 pt-32">
               <div tw="flex flex-col mb-8">
                 <span tw="mb-4 text-6xl font-black uppercase text-black/70">
                   {title}
                 </span>
-                <span tw="text-2xl">{description}</span>
+                <span tw="text-2xl">{truncate(description, 255)}</span>
               </div>
 
               <div tw={wrapperStyle + " text-3xl"} style={{}}>
