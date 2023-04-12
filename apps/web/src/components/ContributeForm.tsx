@@ -40,7 +40,6 @@ export const ContributeForm = ({ token, address, onSuccess }: Props) => {
     <form
       onSubmit={form.handleSubmit((values) => {
         if (hasAllowance) {
-          console.log("fund");
           donate.write({
             recklesslySetUnpreparedArgs: [amount],
             // Add amount to msg.value if ETH

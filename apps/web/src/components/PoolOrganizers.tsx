@@ -36,7 +36,7 @@ export const Organizers = ({ safe }: Props) => {
       <h4 className="mb-6 text-center text-xl font-bold">Organized by</h4>
       <div className="flex justify-center">
         <div className="flex gap-10 overflow-x-auto">
-          {error ? <div>Couldn't load organizers</div> : null}
+          {error ? <div>Couldn&apos;t load organizers</div> : null}
           {organizers.map((address) => (
             <div
               key={address}
