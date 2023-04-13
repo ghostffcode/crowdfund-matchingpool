@@ -834,332 +834,332 @@ export const RadialSVGBottom = () => (
       <path
         d="M2.44409 627.241H1079.98"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M625.854 637.613L456.902 616.868"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M690.276 664.342L392.668 590.14"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M535.589 625.226L546.083 629.255"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M34.5612 358.474L1045.52 896.008"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M0.838257 249.136L1080.82 1005.34"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M111.643 241.485L968.493 1013"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M662.281 766.616L419.967 487.866"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M641.284 777.014L439.238 477.467"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M286.681 128.596L794.825 1125.89"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M312.375 1L768.241 1253.48"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M432.814 160.177L648.474 1094.3"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M519.531 421.22L562.838 833.261"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M546.83 270.794L534.387 983.687"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M578.947 356.901L502.96 897.58"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M638.364 264.274L443.851 990.207"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M739.533 134.406L341.297 1120.08"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M362.915 949.577L720.263 304.904"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M566.1 591.513L514.186 662.968"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M530.839 638.398L551.648 616.083"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M877.637 344.927L204.74 909.554"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M643.182 560.77L438.47 693.711"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M652.817 572.332L427.656 682.15"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M749.168 555.353L331.617 699.128"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M556.465 623.902L525.05 630.579"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M774.862 606.736L306.136 647.745"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M606.247 629.538L474.647 624.943"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M239.575 579.636L840.702 674.845"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M692.963 670.84L388.864 583.641"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M183.064 475.396L898.513 779.086"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M760.409 753.702L322.334 500.779"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M470.313 573.604L612.67 680.877"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M350.302 443.179L731.504 811.302"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M570.918 664.68L510.282 589.801"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M473.303 518.293L609.459 736.188"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M528.573 602.499L551.648 651.982"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M737.927 1235.09L342.922 19.3904"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M660.846 1243.59L421.232 10.886"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M512.108 206.73L570.918 1047.75"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M542.331 593.564L538.801 660.917"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M572.984 443.791L508.29 810.69"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M629.558 336.995L452.084 917.486"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M569.932 563.425L513.107 691.056"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M299.528 1028.49L781.715 225.994"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M514.713 660.142L566.124 594.339"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M110.037 1058.74L973.027 195.745"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M277.046 832.883L803.466 421.598"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M360.551 735.174L719.814 519.307"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M552.638 622.015L529.166 632.466"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M129.307 752.834L950.901 501.647"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M582.496 619.99L500.26 634.491"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M956.788 605.431L124.489 649.05"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M74.7077 594.643L1007.04 659.838"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M400.697 599.97L681.288 654.511"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
       <path
         d="M45.8023 466.211L1037 788.27"
         stroke="#807433"
-        stroke-width="0.5"
-        stroke-linecap="round"
+        strokeWidth="0.5"
+        strokeLinecap="round"
       />
     </g>
     <path
@@ -1231,8 +1231,8 @@ export const RadialSVGBottom = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(729.949 485.324) rotate(139.854) scale(355.437 342.865)"
       >
-        <stop stop-color="#E6FF4D" />
-        <stop offset="1" stop-color="#FFE767" />
+        <stop stopColor="#E6FF4D" />
+        <stop offset="1" stopColor="#FFE767" />
       </radialGradient>
       <radialGradient
         id="paint1_radial_0_1"
@@ -1242,8 +1242,8 @@ export const RadialSVGBottom = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(370.657 544.088) rotate(27.0717) scale(384.868 371.255)"
       >
-        <stop offset="0.0677083" stop-color="#80FFBB" />
-        <stop offset="0.696455" stop-color="#FFE767" />
+        <stop offset="0.0677083" stopColor="#80FFBB" />
+        <stop offset="0.696455" stopColor="#FFE767" />
       </radialGradient>
       <radialGradient
         id="paint2_radial_0_1"
@@ -1253,8 +1253,8 @@ export const RadialSVGBottom = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(508.434 780.539) rotate(-77.9204) scale(205.276 198.015)"
       >
-        <stop stop-color="#E6FF4D" />
-        <stop offset="1" stop-color="#FFE767" />
+        <stop stopColor="#E6FF4D" />
+        <stop offset="1" stopColor="#FFE767" />
       </radialGradient>
       <radialGradient
         id="paint3_radial_0_1"
@@ -1264,8 +1264,8 @@ export const RadialSVGBottom = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(549.251 545.946) rotate(93.2669) scale(188.446 181.78)"
       >
-        <stop offset="0.0677083" stop-color="#80FFBB" />
-        <stop offset="0.696455" stop-color="#FFE767" />
+        <stop offset="0.0677083" stopColor="#80FFBB" />
+        <stop offset="0.696455" stopColor="#FFE767" />
       </radialGradient>
       <radialGradient
         id="paint4_radial_0_1"
@@ -1275,8 +1275,8 @@ export const RadialSVGBottom = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(731.482 486.609) rotate(139.854) scale(355.437 342.865)"
       >
-        <stop stop-color="#FF4DC5" />
-        <stop offset="1" stop-color="#FFE767" />
+        <stop stopColor="#FF4DC5" />
+        <stop offset="1" stopColor="#FFE767" />
       </radialGradient>
       <radialGradient
         id="paint5_radial_0_1"
@@ -1286,8 +1286,8 @@ export const RadialSVGBottom = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(372.19 545.373) rotate(27.0717) scale(384.868 371.255)"
       >
-        <stop offset="0.0677083" stop-color="#FFA24D" />
-        <stop offset="0.696455" stop-color="#FFE767" />
+        <stop offset="0.0677083" stopColor="#FFA24D" />
+        <stop offset="0.696455" stopColor="#FFE767" />
       </radialGradient>
       <radialGradient
         id="paint6_radial_0_1"
@@ -1297,8 +1297,8 @@ export const RadialSVGBottom = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(509.966 781.824) rotate(-77.9204) scale(205.276 198.015)"
       >
-        <stop stop-color="#FF4DC5" />
-        <stop offset="1" stop-color="#FFE767" />
+        <stop stopColor="#FF4DC5" />
+        <stop offset="1" stopColor="#FFE767" />
       </radialGradient>
       <radialGradient
         id="paint7_radial_0_1"
@@ -1308,8 +1308,8 @@ export const RadialSVGBottom = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(550.784 547.231) rotate(93.2669) scale(188.446 181.78)"
       >
-        <stop offset="0.0677083" stop-color="#FFA24D" />
-        <stop offset="0.696455" stop-color="#FFE767" />
+        <stop offset="0.0677083" stopColor="#FFA24D" />
+        <stop offset="0.696455" stopColor="#FFE767" />
       </radialGradient>
     </defs>
   </svg>
