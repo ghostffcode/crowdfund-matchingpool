@@ -1,5 +1,6 @@
 export default {
   title: "Crowdfund Matching Pool",
   description: "",
-  url: "https://crowdfund-mp.vercel.app",
+  twitter: "@supermodularxyz",
+  url: "https://crowdfund-matchingpool.vercel.app",
 };

@@ -1,3 +1,16 @@
+# Crowdfund Matching Pool
+
+### Getting started
+
+To run the frontend app:
+
+```sh
+npm run
+npm run codegen # Generates graphql queries and typescript types
+```
+
+---
+
 # Turborepo starter
 
 This is an official npm starter turborepo.

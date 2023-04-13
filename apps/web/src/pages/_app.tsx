@@ -1,19 +1,26 @@
+import "@rainbow-me/rainbowkit/styles.css";
+import "~/styles/globals.css";
+
+import { Inter } from "next/font/google";
+
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
-import { SessionProvider } from "next-auth/react";
 
 import { api } from "~/utils/api";
+import { WalletProvider } from "~/providers/WalletProvider";
 
-import "~/styles/globals.css";
+const inter = Inter({ subsets: ["latin"] });
 
 const MyApp: AppType<{ session: Session | null }> = ({
   Component,
   pageProps: { session, ...pageProps },
 }) => {
   return (
-    <SessionProvider session={session}>
-      <Component {...pageProps} />
-    </SessionProvider>
+    <WalletProvider>
+      <main className={inter.className}>
+        <Component {...pageProps} />
+      </main>
+    </WalletProvider>
   );
 };
 

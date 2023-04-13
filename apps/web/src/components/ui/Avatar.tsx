@@ -5,21 +5,21 @@ import { createComponent } from ".";
 import { Image } from "./Image";
 
 const avatar = tv({
-  base: "block rounded-full relative bg-gray-400",
+  base: "block rounded-full relative",
   variants: {
     color: {
-      gray: "bg-gray-300",
+      primary: "bg-primary-600",
     },
     size: {
-      sm: "w-16 h-16",
-      md: "w-32 h-32",
+      sm: "w-10 h-10",
+      md: "w-20 h-20",
       lg: "w-48 h-48",
     },
   },
 
   defaultVariants: {
     size: "md",
-    color: "gray",
+    color: "primary",
   },
 });
 
@@ -29,7 +29,7 @@ export const Avatar = ({ src = "", alt = "", ...props }) => (
   <Wrapper {...props}>
     <Image
       as={RadixAvatar.Image}
-      className="object-cover object-center"
+      className="rounded-full object-cover object-center"
       src={src}
       alt={alt}
     />
