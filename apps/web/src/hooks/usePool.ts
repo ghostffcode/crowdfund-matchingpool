@@ -1,11 +1,6 @@
 import { ethers } from "ethers";
 import { useEffect } from "react";
-import {
-  Address,
-  useContractWrite,
-  useQuery,
-  useWaitForTransaction,
-} from "wagmi";
+import { Address, useContractWrite, useWaitForTransaction } from "wagmi";
 import { pool } from "~/data/mock";
 import { useContractConfig } from "./useContractConfig";
 

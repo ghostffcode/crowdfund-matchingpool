@@ -1,4 +1,4 @@
-import { request, gql, GraphQLClient } from "graphql-request";
+import { gql, GraphQLClient } from "graphql-request";
 
 const crowdfundQuery = gql/* GraphQL */ `
   query getCrowdfund($address: ID!, $first: Int, $skip: Int) {
