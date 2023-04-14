@@ -9,7 +9,7 @@ import {
   progressBarStyle,
   wrapperStyle,
 } from "~/components/RaisedProgress";
-import { pool, poolMetadata } from "~/data/mock";
+import { pool } from "~/data/mock";
 import { queryCrowdfund } from "~/hooks/useCrowdfund";
 import { formatMoney } from "~/utils/currency";
 import { isNativeToken } from "~/utils/token";
@@ -29,7 +29,11 @@ const fetchMetadata = async (cid: string) => {
   }).then((r) => (r.ok ? r.json() : null));
 };
 
-const fetchToken = async (address: string) => {
+const fetchToken = async (address: string, chainId = "1") => {
+  const chains = {
+    1: "mainnet",
+    5: "goerli",
+  };
   const options = {
     method: "POST",
     headers: { accept: "application/json", "content-type": "application/json" },
@@ -42,7 +46,9 @@ const fetchToken = async (address: string) => {
   };
 
   return fetch(
-    `https://eth-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}`,
+    `https://eth-${chains[chainId as keyof typeof chains]}.g.alchemy.com/v2/${
+      process.env.NEXT_PUBLIC_ALCHEMY_ID
+    }`,
     options
   )
     .then((res) => res.json())
@@ -58,21 +64,21 @@ export default async function handler(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
     const address = searchParams.get("crowdfundAddress")?.toLocaleLowerCase();
+    const chainId = searchParams.get("chainId");
     if (!address) {
       throw new Error("No crowdfund address provided");
     }
-    const crowdfund = (await queryCrowdfund({ address })) || pool;
+    const crowdfund = await queryCrowdfund({ address });
     if (!crowdfund) {
       throw new Error("No crowdfund found");
     }
 
-    const { title, description } =
-      (await fetchMetadata(crowdfund.metaPtr)) || poolMetadata;
+    const { title, description } = await fetchMetadata(crowdfund.metaPtr);
 
     // Fetch token to get correct decimals in formatting
     const token = isNativeToken(crowdfund.token)
       ? {}
-      : await fetchToken(crowdfund.token);
+      : await fetchToken(crowdfund.token, chainId!);
 
     const inter400 = await fetchFont("400");
     // Not getting font weights to work with Satori
@@ -81,8 +87,9 @@ export default async function handler(req: NextRequest) {
 
     const { goal = "0", totalDonations = "0" } = crowdfund;
 
-    const percentage = `${(+"0" / +goal) * 100}%`;
+    const percentage = `${(+totalDonations / +goal) * 100}%`;
 
+    console.log("PERCENTAGE", percentage, goal, totalDonations);
     const formatAmount = (val: string) =>
       formatMoney(ethers.utils.formatUnits(val, token.decimals));
 

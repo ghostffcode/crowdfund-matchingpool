@@ -13,7 +13,8 @@ import { ContributeForm } from "~/components/ContributeForm";
 import { Button } from "~/components/ui/Button";
 import { fetchIpfs } from "~/utils/ipfs";
 import { queryCrowdfund } from "~/hooks/useCrowdfund";
-import { Address } from "wagmi";
+import { Address, useNetwork } from "wagmi";
+import { useRouter } from "next/router";
 
 const appUrl =
   process.env.NODE_ENV === "production" ? site.url : "http://localhost:3000";
@@ -29,8 +30,12 @@ const ViewMatchingPool: NextPage<{ address: string } & MatchingPool> = ({
   donations,
   ...rest
 }) => {
+  const router = useRouter();
+  const { chain } = useNetwork();
+  const chainId = router.query.chainId || chain?.id;
   const [isOpen, setOpen] = useState(false);
-  const ogImage = `${appUrl}/api/og?crowdfundAddress=${address}`;
+
+  const ogImage = `${appUrl}/api/og?crowdfundAddress=${address}&chainId=${chainId}`;
 
   console.log({
     address,
