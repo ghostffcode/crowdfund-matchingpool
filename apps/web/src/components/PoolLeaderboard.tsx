@@ -1,9 +1,12 @@
-import { formatMoney } from "~/utils/currency";
+import { Address } from "wagmi";
 import { EnsAvatar } from "./EnsAvatar";
 import { EnsName } from "./EnsName";
+import { TokenAmount } from "./TokenAmount";
 import { Button } from "./ui/Button";
 
-export const Leaderboard = ({ donations = [] }: { donations: any[] }) => {
+type Props = { token: Address; donations: any[] };
+
+export const Leaderboard = ({ token, donations = [] }: Props) => {
   return (
     <section>
       <h4 className="mb-2 text-xl font-bold">Leaderboard</h4>
@@ -23,7 +26,9 @@ export const Leaderboard = ({ donations = [] }: { donations: any[] }) => {
               />
               <div className="flex flex-1 items-center justify-between pl-4">
                 <EnsName address={donation.user.address} />
-                <div className="">${formatMoney(donation.amount)}</div>
+                <div>
+                  <TokenAmount amount={donation.amount} token={token} />
+                </div>
               </div>
             </div>
           ))

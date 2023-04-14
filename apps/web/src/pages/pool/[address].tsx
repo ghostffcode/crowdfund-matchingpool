@@ -7,7 +7,6 @@ import { Layout } from "~/layouts/Layout";
 import { Leaderboard } from "~/components/PoolLeaderboard";
 import { Organizers } from "~/components/PoolOrganizers";
 import { RaisedProgress } from "~/components/RaisedProgress";
-import { pool, poolMetadata } from "~/data/mock";
 import { PoolDetails } from "~/components/PoolDetails";
 import { useState } from "react";
 import { ContributeForm } from "~/components/ContributeForm";
@@ -79,7 +78,7 @@ const ViewMatchingPool: NextPage<{ address: string } & MatchingPool> = ({
             Contribute now
           </Button>
         )}
-        <Leaderboard donations={donations} />
+        <Leaderboard donations={donations} token={token} />
       </div>
     </Layout>
   );
