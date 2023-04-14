@@ -2,6 +2,8 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import {
   connectorsForWallets,
+  darkTheme,
+  lightTheme,
   RainbowKitProvider,
 } from "@rainbow-me/rainbowkit";
 import { metaMaskWallet } from "@rainbow-me/rainbowkit/wallets";
@@ -42,7 +44,18 @@ const queryClient = new QueryClient();
 export const WalletProvider = ({ children }: PropsWithChildren) => (
   <WagmiConfig client={wagmiClient}>
     <QueryClientProvider client={queryClient}>
-      <RainbowKitProvider chains={chains}>{children}</RainbowKitProvider>
+      <RainbowKitProvider
+        chains={chains}
+        theme={lightTheme({
+          accentColor: "#5C4DFF",
+          accentColorForeground: "white",
+          borderRadius: "none",
+          fontStack: "system",
+          overlayBlur: "small",
+        })}
+      >
+        {children}
+      </RainbowKitProvider>
     </QueryClientProvider>
   </WagmiConfig>
 );
