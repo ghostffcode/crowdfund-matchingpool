@@ -13,6 +13,7 @@ import { pool, poolMetadata } from "~/data/mock";
 import { queryCrowdfund } from "~/hooks/useCrowdfund";
 import { formatMoney } from "~/utils/currency";
 import { isNativeToken } from "~/utils/token";
+import { truncate } from "~/utils/truncate";
 
 export const config = {
   runtime: "edge",
@@ -53,9 +54,6 @@ const fetchFont = (weight = "400") =>
     new URL("../../../public/inter-latin-400-normal.ttf", import.meta.url)
   ).then((res) => res.arrayBuffer());
 
-const truncate = (str = "", maxLength = Infinity) => {
-  return str.length >= maxLength ? str.slice(0, maxLength) + "..." : str;
-};
 export default async function handler(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);

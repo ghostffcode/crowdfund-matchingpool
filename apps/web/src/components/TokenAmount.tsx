@@ -16,7 +16,7 @@ export const TokenAmount = ({
     enabled: !isNativeToken(token),
   });
 
-  const formatted = (val: string) =>
+  const formatted = (val = "0") =>
     ethers.utils.formatUnits(val, data?.decimals);
 
   return (

@@ -93,10 +93,7 @@ export async function getServerSideProps(ctx: GetServerSidePropsContext) {
     };
   }
 
-  const metadata = (await fetchIpfs(crowdfund.metaPtr)) || {
-    title: "NO_METADATA_TITLE",
-    description: "NO_METADATA_DESCRIPTION",
-  };
+  const metadata = await fetchIpfs(crowdfund.metaPtr);
 
   return {
     props: {
