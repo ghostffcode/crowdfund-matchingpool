@@ -86,16 +86,18 @@ const ViewMatchingPool: NextPage<{ address: string } & MatchingPool> = ({
 };
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-  const address = ctx.params?.address as string;
-
-  const crowdfund = (await queryCrowdfund({ address })) || pool;
+  const address = (ctx.params?.address as string).toLowerCase();
+  const crowdfund = await queryCrowdfund({ address });
   if (!crowdfund) {
     return {
       notFound: true,
     };
   }
 
-  const metadata = (await fetchIpfs(crowdfund.metaPtr)) || poolMetadata;
+  const metadata = (await fetchIpfs(crowdfund.metaPtr)) || {
+    title: "NO_METADATA_TITLE",
+    description: "NO_METADATA_DESCRIPTION",
+  };
 
   return {
     props: {
