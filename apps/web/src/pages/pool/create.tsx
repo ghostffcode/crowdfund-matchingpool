@@ -1,7 +1,8 @@
+import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { ethers } from "ethers";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { useAccount, useWaitForTransaction } from "wagmi";
+import { Address, useWaitForTransaction } from "wagmi";
 import { z } from "zod";
 import { Button } from "~/components/ui/Button";
 import {
@@ -43,22 +44,31 @@ const tokens = [
 ];
 const CreateForm = () => {
   const router = useRouter();
-  const create = useCrowdfundCreate();
-  const uploadMeta = useIpfsUpload();
 
-  const account = useAccount();
+  const hash = router.query.tx as Address;
+  const create = useCrowdfundCreate({
+    onSuccess: ({ hash }) => {
+      // Redirect to the hash so we can track the transaction if the browser is reloaded
+      router.push(`/pool/create?tx=${hash}`);
+    },
+  });
+  const uploadMeta = useIpfsUpload();
 
   console.log("create", create);
   const tx = useWaitForTransaction({
-    hash: create.data?.hash,
+    hash,
+    enabled: Boolean(hash),
     onSuccess(data) {
-      console.log("onSuccess", data);
+      const log = data.logs[2];
+      if (log) {
+        const { crowdfund } = create.iface.parseLog(log).args;
+        router.push(`/pool/${crowdfund}`);
+      }
     },
   });
 
   const isLoading = uploadMeta.isLoading || create.isLoading || tx.isLoading;
   const error = uploadMeta.error || create.error || tx.error;
-  console.log({ isLoading, error });
 
   return (
     <Form
@@ -75,6 +85,7 @@ const CreateForm = () => {
         const endsAt = Math.floor(
           (Date.now() + 1000 * 60 * 60 * 24 * 30) / 1000
         );
+
         const params = encodeCrowdfundParams([
           safe,
           token,
@@ -127,6 +138,10 @@ const CreateForm = () => {
 const CreateCrowdfund: NextPage = () => {
   return (
     <Layout>
+      <div className="mb-6">
+        <span>Temporary connect wallet</span>
+        <ConnectButton />
+      </div>
       <h4 className="mb-6 text-center text-xl font-bold">
         Create new crowdfund
       </h4>

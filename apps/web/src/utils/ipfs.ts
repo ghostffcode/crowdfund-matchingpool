@@ -23,5 +23,12 @@ export const fetchIpfs = async (cid: string) => {
 
   return fetch(`${ipfsGateway}${cid}`, {
     headers: { "content-type": "application/json" },
-  }).then((r) => (r.ok ? r.json() : null));
+  }).then((r) =>
+    r.ok
+      ? r.json()
+      : {
+          title: "NO_METADATA_TITLE",
+          description: "NO_METADATA_DESCRIPTION",
+        }
+  );
 };

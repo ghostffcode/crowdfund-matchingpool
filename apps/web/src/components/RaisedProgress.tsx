@@ -1,31 +1,23 @@
 import { createComponent } from "./ui";
 import { tv } from "tailwind-variants";
-import { formatMoney } from "~/utils/currency";
-import { Address, useToken } from "wagmi";
-import { ethers } from "ethers";
-import { isNativeToken } from "~/utils/token";
+import { Address } from "wagmi";
+import { TokenAmount } from "./TokenAmount";
 
 type Props = { token: Address; goal: string; totalDonations: string };
 
 export const RaisedProgress = ({ token, goal, totalDonations }: Props) => {
   const percentage = `${(+totalDonations / +goal) * 100}%`;
 
-  const { data } = useToken({
-    address: token,
-    enabled: !isNativeToken(token),
-  });
-
-  const formatted = (val: string) =>
-    ethers.utils.formatUnits(val, data?.decimals);
-
   return (
     <Wrapper className="text-lg">
       <ProgressBar style={{ width: percentage }} />
       <Indicator style={{ left: percentage }} />
       <CurrentValue style={{ left: percentage, transform: `translateX(-50%)` }}>
-        {formatMoney(formatted(totalDonations))} Raised
+        <TokenAmount amount={totalDonations} token={token} /> Raised
       </CurrentValue>
-      <MaxValue>{formatMoney(formatted(goal))} Goal</MaxValue>
+      <MaxValue>
+        <TokenAmount amount={goal} token={token} /> Goal
+      </MaxValue>
     </Wrapper>
   );
 };

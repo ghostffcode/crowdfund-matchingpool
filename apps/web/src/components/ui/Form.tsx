@@ -81,7 +81,6 @@ export function Form<S extends z.ZodType<any, any>>({
   // Initialize the form with defaultValues and schema for validation
   const form = useForm({ defaultValues, resolver: zodResolver(schema) });
   // Pass the form methods to a FormProvider. This lets us access the form from components without passing props.
-  console.log(form.formState.errors);
   return (
     <FormProvider {...form}>
       <form onSubmit={form.handleSubmit(onSubmit)}>{children}</form>

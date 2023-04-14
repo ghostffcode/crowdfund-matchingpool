@@ -7,14 +7,14 @@ import { Layout } from "~/layouts/Layout";
 import { Leaderboard } from "~/components/PoolLeaderboard";
 import { Organizers } from "~/components/PoolOrganizers";
 import { RaisedProgress } from "~/components/RaisedProgress";
-import { pool, poolMetadata } from "~/data/mock";
 import { PoolDetails } from "~/components/PoolDetails";
 import { useState } from "react";
 import { ContributeForm } from "~/components/ContributeForm";
 import { Button } from "~/components/ui/Button";
 import { fetchIpfs } from "~/utils/ipfs";
 import { queryCrowdfund } from "~/hooks/useCrowdfund";
-import { Address } from "wagmi";
+import { Address, useNetwork } from "wagmi";
+import { useRouter } from "next/router";
 
 const appUrl =
   process.env.NODE_ENV === "production" ? site.url : "http://localhost:3000";
@@ -30,8 +30,12 @@ const ViewMatchingPool: NextPage<{ address: string } & MatchingPool> = ({
   donations,
   ...rest
 }) => {
+  const router = useRouter();
+  const { chain } = useNetwork();
+  const chainId = router.query.chainId || chain?.id;
   const [isOpen, setOpen] = useState(false);
-  const ogImage = `${appUrl}/api/og?crowdfundAddress=${address}`;
+
+  const ogImage = `${appUrl}/api/og?crowdfundAddress=${address}&chainId=${chainId}`;
 
   console.log({
     address,
@@ -79,23 +83,22 @@ const ViewMatchingPool: NextPage<{ address: string } & MatchingPool> = ({
             Contribute now
           </Button>
         )}
-        <Leaderboard donations={donations} />
+        <Leaderboard donations={donations} token={token} />
       </div>
     </Layout>
   );
 };
 
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
-  const address = ctx.params?.address as string;
-
-  const crowdfund = (await queryCrowdfund({ address })) || pool;
+  const address = (ctx.params?.address as string).toLowerCase();
+  const crowdfund = await queryCrowdfund({ address });
   if (!crowdfund) {
     return {
       notFound: true,
     };
   }
 
-  const metadata = (await fetchIpfs(crowdfund.metaPtr)) || poolMetadata;
+  const metadata = await fetchIpfs(crowdfund.metaPtr);
 
   return {
     props: {
