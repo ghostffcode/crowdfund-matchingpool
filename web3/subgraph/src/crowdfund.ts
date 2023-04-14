@@ -29,6 +29,7 @@ export function donationHandler(event: Donated): void {
     fundDonor.balance = amount;
     fundDonor.crowdfund = crowdfund.id;
     fundDonor.createdAt = event.block.timestamp;
+    fundDonor.user = user.id
   } else {
     // increment balance & amount
     fundDonor.amount = fundDonor.amount.plus(amount);
