@@ -6,6 +6,9 @@ import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
 import {ReentrancyGuard} from "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
 
+error dateError();
+error invalidGoal();
+error withdrawalIsNotActive();
 error NotEnoughETHDonation();
 error NotEnoughBalance();
 error FailedToSendNativeToken();
@@ -29,12 +32,16 @@ contract Crowdfund is Ownable, ReentrancyGuard {
     event UserBalanceWithdrawn(address user, uint256 balance);
 
     modifier crowfundingEnded() {
-        require(!hasCrowdfundingEnded(), "Crowd funding hasn't ended");
+        require(block.timestamp > endsAt, "Crowd funding hasn't ended");
+        _;
+    }
+
+    modifier crowdfundingIsActive() {
+        require(endsAt < block.timestamp > startsAt, "Crowd funding is not active");
         _;
     }
 
     constructor(bytes memory meta) {
-        // pass data to constructor for new matchingPool
         (
             address safe,
             address _token,
@@ -47,6 +54,14 @@ contract Crowdfund is Ownable, ReentrancyGuard {
                 (address, address, uint256, uint256, uint256, bytes)
             );
 
+        if (_endsAt <= _startsAt) {
+            revert dateError();
+        }
+
+        if (_goal < 1) {
+            revert invalidGoal();
+        }
+
         _transferOwnership(safe);
         if (_token != address(0)) {
             token = IERC20(_token);
@@ -57,41 +72,32 @@ contract Crowdfund is Ownable, ReentrancyGuard {
         metaPtr = _metaPtr;
     }
 
-    // editCrowdfund
-
-    function donate(uint256 amount) public payable {
+    function donate(uint256 amount) public payable crowdfundingIsActive {
         uint256 _donatedAmount = msg.value;
         if (tokenIsNative()) {
-            // it's an ETH donation
             if (msg.value == 0) {
                 revert NotEnoughETHDonation();
             }
         } else {
-            // it's ERC20 donation
-            // transfer amount to this contract
             token.safeTransferFrom(msg.sender, address(this), amount);
             _donatedAmount = amount;
         }
 
-        // increase user balance
         userFunds[msg.sender] += _donatedAmount;
 
         emit Donated(msg.sender, _donatedAmount);
     }
 
-    // enableRefund
     function enableRefund() public onlyOwner crowfundingEnded {
         canRefund = true;
 
         emit RefundActive(true);
     }
 
-    // fund
     function fund() public onlyOwner nonReentrant {
         uint256 amount = address(this).balance;
         address to = owner();
         if (tokenIsNative()) {
-            // withdraw native
             (bool sent, ) = to.call{value: amount}("");
             require(sent, "Failed to send Ether");
         } else {
@@ -102,8 +108,11 @@ contract Crowdfund is Ownable, ReentrancyGuard {
         emit Funded(to, amount);
     }
 
-    // withdraw
     function withdraw() public nonReentrant {
+        if (!canRefund) {
+            revert withdrawalIsNotActive();
+        }
+
         uint256 amount = userFunds[msg.sender];
 
         userFunds[msg.sender] = 0;
@@ -129,6 +138,6 @@ contract Crowdfund is Ownable, ReentrancyGuard {
     }
 
     function hasCrowdfundingEnded() public view returns (bool) {
-        return block.timestamp < endsAt;
+        return block.timestamp > endsAt;
     }
 }
