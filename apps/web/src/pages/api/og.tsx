@@ -29,11 +29,11 @@ const fetchMetadata = async (cid: string) => {
   }).then((r) => (r.ok ? r.json() : null));
 };
 
+const chains = {
+  1: "mainnet",
+  5: "goerli",
+};
 const fetchToken = async (address: string, chainId = "1") => {
-  const chains = {
-    1: "mainnet",
-    5: "goerli",
-  };
   const options = {
     method: "POST",
     headers: { accept: "application/json", "content-type": "application/json" },
@@ -44,11 +44,10 @@ const fetchToken = async (address: string, chainId = "1") => {
       params: [address],
     }),
   };
+  const network = chains[chainId as unknown as keyof typeof chains];
 
   return fetch(
-    `https://eth-${chains[chainId as keyof typeof chains]}.g.alchemy.com/v2/${
-      process.env.NEXT_PUBLIC_ALCHEMY_ID
-    }`,
+    `https://eth-${network}.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}`,
     options
   )
     .then((res) => res.json())
