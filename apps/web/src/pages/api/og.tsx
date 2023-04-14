@@ -1,4 +1,5 @@
 import { ImageResponse } from "@vercel/og";
+import { ethers } from "ethers";
 import { NextRequest } from "next/server";
 import { RadialSVG, RadialSVGRight } from "~/components/RadialSVG";
 import {
@@ -11,6 +12,7 @@ import {
 import { pool, poolMetadata } from "~/data/mock";
 import { queryCrowdfund } from "~/hooks/useCrowdfund";
 import { formatMoney } from "~/utils/currency";
+import { isNativeToken } from "~/utils/token";
 
 export const config = {
   runtime: "edge",
@@ -26,6 +28,26 @@ const fetchMetadata = async (cid: string) => {
   }).then((r) => (r.ok ? r.json() : null));
 };
 
+const fetchToken = async (address: string) => {
+  const options = {
+    method: "POST",
+    headers: { accept: "application/json", "content-type": "application/json" },
+    body: JSON.stringify({
+      id: 1,
+      jsonrpc: "2.0",
+      method: "alchemy_getTokenMetadata",
+      params: [address],
+    }),
+  };
+
+  return fetch(
+    `https://eth-mainnet.g.alchemy.com/v2/${process.env.NEXT_PUBLIC_ALCHEMY_ID}`,
+    options
+  )
+    .then((res) => res.json())
+    .then((r) => r.result);
+};
+
 const fetchFont = (weight = "400") =>
   fetch(
     new URL("../../../public/inter-latin-400-normal.ttf", import.meta.url)
@@ -37,7 +59,7 @@ const truncate = (str = "", maxLength = Infinity) => {
 export default async function handler(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
-    const address = searchParams.get("crowdfundAddress");
+    const address = searchParams.get("crowdfundAddress")?.toLocaleLowerCase();
     if (!address) {
       throw new Error("No crowdfund address provided");
     }
@@ -46,7 +68,13 @@ export default async function handler(req: NextRequest) {
       throw new Error("No crowdfund found");
     }
 
-    const metadata = (await fetchMetadata(crowdfund.metaPtr)) || poolMetadata;
+    const { title, description } =
+      (await fetchMetadata(crowdfund.metaPtr)) || poolMetadata;
+
+    // Fetch token to get correct decimals in formatting
+    const token = isNativeToken(crowdfund.token)
+      ? {}
+      : await fetchToken(crowdfund.token);
 
     const inter400 = await fetchFont("400");
     // Not getting font weights to work with Satori
@@ -54,10 +82,11 @@ export default async function handler(req: NextRequest) {
     // const inter900 = await fetchFont("900");
 
     const { goal = "0", totalDonations = "0" } = crowdfund;
-    // Fetch from ipfs
-    const { title, description } = poolMetadata;
 
     const percentage = `${(+"0" / +goal) * 100}%`;
+
+    const formatAmount = (val: string) =>
+      formatMoney(ethers.utils.formatUnits(val, token.decimals));
 
     return new ImageResponse(
       (
@@ -104,10 +133,10 @@ export default async function handler(req: NextRequest) {
                   tw={currentValueStyle}
                   style={{ left: percentage, transform: `translateX(-50%)` }}
                 >
-                  {formatMoney(totalDonations)} Raised
+                  {formatAmount(totalDonations)} Raised
                 </span>
                 <span tw={maxValueStyle + " flex justify-end"}>
-                  {formatMoney(goal)} Goal
+                  {formatAmount(goal)} Goal
                 </span>
               </div>
             </div>
