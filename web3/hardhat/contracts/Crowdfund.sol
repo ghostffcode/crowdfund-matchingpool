@@ -24,7 +24,7 @@ contract Crowdfund is Ownable, ReentrancyGuard {
 
     bool public canRefund;
 
-    mapping(address => uint256) userFunds;
+    mapping(address => uint256) public userFunds;
 
     event Donated(address sender, uint256 amount);
     event Funded(address to, uint256 amount);
