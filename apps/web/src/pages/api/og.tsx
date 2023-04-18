@@ -90,7 +90,9 @@ export default async function handler(req: NextRequest) {
 
     console.log("PERCENTAGE", percentage, goal, totalDonations);
     const formatAmount = (val: string) =>
-      formatMoney(ethers.utils.formatUnits(val, token.decimals));
+      `${token.symbol || "ETH"} ${formatMoney(
+        ethers.utils.formatUnits(val, token.decimals)
+      )}`;
 
     return new ImageResponse(
       (
