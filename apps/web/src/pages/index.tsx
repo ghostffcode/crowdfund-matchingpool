@@ -7,6 +7,7 @@ import { fetchIpfs } from "~/utils/ipfs";
 import { truncate } from "~/utils/truncate";
 
 import { MatchingPool } from "~/types";
+import { Button } from "~/components/ui/Button";
 
 const Home: NextPage<{ crowdfunds: MatchingPool[] }> = ({
   crowdfunds = [],
@@ -14,6 +15,15 @@ const Home: NextPage<{ crowdfunds: MatchingPool[] }> = ({
   console.log(crowdfunds);
   return (
     <Layout>
+      <div className="flex flex-1 flex-col items-center text-center mb-8">
+        <h1 className="text-2xl mb-4 font-semibold">Matching Pool Crowdfund Creator</h1>
+        <h2 className="text-base mb-2">Want to build momentum towards your Gitcoin Grants Round?   Use this tool to host a crowdfund contributions to your Matching pool + build momentum towards a bigger + better Gitcoin campaign.</h2>
+        <div className="text-center my-4">
+          <Button color="primary" size="sm">
+            <Link href="/pool/create">Create Crowdfund</Link>
+          </Button>
+          </div>
+      </div>
       <div className="flex flex-col gap-4">
         {crowdfunds.map((cf) => (
           <Link
