@@ -33,7 +33,8 @@ export const ContributeForm = ({ token, address, onSuccess }: Props) => {
 
   const hasAllowance =
     isNativeToken(token) || (amount.gt(0) && allowance.data?.gte(amount));
-  const isLoading = allowance.isLoading || approve.isLoading;
+  const isLoading =
+    allowance.isLoading || approve.isLoading || donate.isLoading;
 
   const error = approve.error || donate.error;
   return (
