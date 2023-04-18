@@ -1,4 +1,5 @@
 // import { BigInt, Address } from "@graphprotocol/graph-ts";
+import { BigInt } from "@graphprotocol/graph-ts";
 import { CrowdfundCreated } from "../generated/CrowdfundFactory/CrowdfundFactory"
 import { Crowdfund as CrowdfundSchema, User } from "../generated/schema";
 import { Crowdfund as CrowdfundContract } from "../generated/templates";
@@ -23,12 +24,15 @@ export function handleNewCrowdfund(event: CrowdfundCreated): void {
   // update the crowdfund entity
   crowdfund.creator = creator.id;
   crowdfund.token = crowdfundContract.token();
+  crowdfund.safe = crowdfundContract.owner();
   crowdfund.startsAt = crowdfundContract.startsAt();
   crowdfund.endsAt = crowdfundContract.endsAt();
   crowdfund.goal = crowdfundContract.goal();
   crowdfund.metaPtr = crowdfundContract.metaPtr().toString();
   crowdfund.canRefund = crowdfundContract.canRefund();
   crowdfund.createdAt = event.block.timestamp;
+  crowdfund.totalDonations = new BigInt(0)
+  crowdfund.funded = new BigInt(0)
   crowdfund.transactionHash = event.transaction.hash.toHexString();
 
   // save

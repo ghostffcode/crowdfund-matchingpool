@@ -153,14 +153,14 @@ const config = {
     },
     polygon: {
       url: 'https://polygon-rpc.com',
-      gasPrice: 3200000000,
+      gasPrice: 200000000000,
       accounts: {
         mnemonic: mnemonic(),
       },
     },
     mumbai: {
       url: 'https://rpc-mumbai.maticvigil.com',
-      gasPrice: 3200000000,
+      gasPrice: 200000000,
       accounts: {
         mnemonic: mnemonic(),
       },

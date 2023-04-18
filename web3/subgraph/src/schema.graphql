@@ -2,6 +2,7 @@ type Crowdfund @entity {
   id: ID!
   creator: User!
   token: Bytes!
+  safe: Bytes!
   startsAt: BigInt!
   endsAt: BigInt!
   goal: BigInt!

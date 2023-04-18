@@ -72,8 +72,6 @@ export async function queryCrowdfunds({
   return crowdfunds;
 }
 
-// TODO: Add query for pagination
-
 export function useDonations(
   params: { address: string; first: number; skip: number },
   donations: Donation[]
@@ -81,7 +79,9 @@ export function useDonations(
   return useQuery(
     ["donations", params],
     async () => {
-      return queryCrowdfund(params).then((crowdfund) => crowdfund.donations);
+      return queryCrowdfund(params).then(
+        (crowdfund) => crowdfund.donations || []
+      );
     },
     {
       initialData: donations,
