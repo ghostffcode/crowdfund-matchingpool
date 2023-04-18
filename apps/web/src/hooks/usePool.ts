@@ -1,8 +1,10 @@
+import { useQueryClient } from "@tanstack/react-query";
 import { ethers } from "ethers";
 import { useEffect } from "react";
 import { Address, useContractWrite, useWaitForTransaction } from "wagmi";
 import { pool } from "~/data/mock";
 import { useContractConfig } from "./useContractConfig";
+import { useInvalidate } from "./useInvalidate";
 
 const abi = [] as const;
 const useContractRead = (props: any) => ({
@@ -21,6 +23,7 @@ export function usePoolConfig({ address = "" }) {
 
 export function useDonate(address: Address, onSuccess: () => void) {
   const { abi } = useContractConfig("Crowdfund");
+  const client = useQueryClient();
 
   const donate = useContractWrite({
     address,
@@ -30,6 +33,7 @@ export function useDonate(address: Address, onSuccess: () => void) {
   });
 
   const hash = donate.data?.hash;
+
   const tx = useWaitForTransaction({ hash, enabled: Boolean(hash) });
 
   useEffect(() => {
@@ -40,6 +44,9 @@ export function useDonate(address: Address, onSuccess: () => void) {
       const event = iface.parseLog(log);
       console.log(event);
       onSuccess();
+
+      // Refetch donations
+      client.invalidateQueries();
     }
   }, [tx.data]);
   return {

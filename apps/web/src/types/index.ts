@@ -6,7 +6,7 @@ export type Contributor = { address: string; amount: string };
 export type Funds = { raised: string; goal: string; percentage: number };
 
 export type Donation = {
-  user: { address: Address };
+  user: { id: Address };
   amount: string;
 };
 

@@ -9,6 +9,7 @@ export function useInvalidate(hash: Address | undefined, match: object) {
     () =>
       client.invalidateQueries({
         predicate: (query) => {
+          return true;
           const key = query.queryKey[0] as keyof typeof match;
           return Object.entries(match).every(([k, v]) => key[k] === v);
         },
@@ -17,8 +18,8 @@ export function useInvalidate(hash: Address | undefined, match: object) {
   );
 
   useEffect(() => {
-    hash && invalidate();
-  }, [hash, invalidate]);
+    hash && tx.data && invalidate();
+  }, [hash, tx.data, invalidate]);
 
   return tx;
 }

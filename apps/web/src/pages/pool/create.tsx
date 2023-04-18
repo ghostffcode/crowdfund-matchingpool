@@ -73,9 +73,9 @@ const CreateForm = () => {
   return (
     <Form
       defaultValues={{
-        ...poolMetadata,
-        goal: "100",
-        safe: "0x2a5b1b6188669da07947403da21f1cab501374e6",
+        // ...poolMetadata,
+        // goal: "100",
+        // safe: "0x2a5b1b6188669da07947403da21f1cab501374e6",
         token: "0x0000000000000000000000000000000000000000",
       }}
       schema={CreateCrowdfundSchema}
