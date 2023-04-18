@@ -15,7 +15,7 @@ const config = {
   CrowdfundFactory: {
     abi: CrowdfundFactory,
     address: {
-      5: "0x7ce05db48e2b450fa292d8ba482ba859f398935e",
+      5: "0xBC0A82Da08E13a939F4D86FaF01Cc22E7DFFac53",
     },
   },
   Crowdfund: {
