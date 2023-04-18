@@ -35,14 +35,14 @@ contract Crowdfund is Ownable, ReentrancyGuard {
     event UserBalanceWithdrawn(address user, uint256 balance);
 
     modifier crowfundingEnded() {
-        if (block.timestamp > endsAt) {
+        if (block.timestamp < endsAt) {
             revert crowdfundIsActive();
         }
         _;
     }
 
     modifier crowdfundingIsActive() {
-        if (block.timestamp < endsAt || block.timestamp > startsAt) {
+        if (block.timestamp < startsAt || block.timestamp > endsAt) {
             revert inactiveCrowdfund();
         }
         _;
