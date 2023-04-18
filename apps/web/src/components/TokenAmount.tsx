@@ -19,9 +19,10 @@ export const TokenAmount = ({
   const formatted = (val = "0") =>
     ethers.utils.formatUnits(val, data?.decimals);
 
+  const symbol = data?.symbol || isLoading ? "" : "ETH";
   return (
     <Skeleton className="w-24" isLoading={isLoading}>
-      {data?.symbol} {formatMoney(formatted(amount))}
+      {symbol} {formatMoney(formatted(amount))}
     </Skeleton>
   );
 };

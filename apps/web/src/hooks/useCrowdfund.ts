@@ -17,6 +17,10 @@ token
 metaPtr
 goal
 totalDonations
+donations {
+  user { id}
+  amount
+}
 
 `;
 const crowdfundQuery = gql/* GraphQL */ `
