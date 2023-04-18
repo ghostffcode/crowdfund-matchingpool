@@ -8,8 +8,11 @@ import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol
 
 error dateError();
 error invalidGoal();
+error crowdfundIsActive();
+error inactiveCrowdfund();
 error withdrawalIsNotActive();
 error NotEnoughETHDonation();
+error notEnoughTokenDonation();
 error NotEnoughBalance();
 error FailedToSendNativeToken();
 
@@ -32,12 +35,16 @@ contract Crowdfund is Ownable, ReentrancyGuard {
     event UserBalanceWithdrawn(address user, uint256 balance);
 
     modifier crowfundingEnded() {
-        require(block.timestamp > endsAt, "Crowd funding hasn't ended");
+        if (block.timestamp > endsAt) {
+            revert crowdfundIsActive();
+        }
         _;
     }
 
     modifier crowdfundingIsActive() {
-        require(endsAt < block.timestamp > startsAt, "Crowd funding is not active");
+        if (endsAt < block.timestamp || block.timestamp > startsAt) {
+            revert inactiveCrowdfund();
+        }
         _;
     }
 
@@ -75,10 +82,13 @@ contract Crowdfund is Ownable, ReentrancyGuard {
     function donate(uint256 amount) public payable crowdfundingIsActive {
         uint256 _donatedAmount = msg.value;
         if (tokenIsNative()) {
-            if (msg.value == 0) {
+            if (_donatedAmount == 0) {
                 revert NotEnoughETHDonation();
             }
         } else {
+            if (amount == 0) {
+                revert notEnoughTokenDonation();
+            }
             token.safeTransferFrom(msg.sender, address(this), amount);
             _donatedAmount = amount;
         }
