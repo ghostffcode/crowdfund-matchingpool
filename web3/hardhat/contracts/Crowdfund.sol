@@ -112,7 +112,7 @@ contract Crowdfund is Ownable, ReentrancyGuard {
             require(sent, "Failed to send Ether");
         } else {
             amount = token.balanceOf(address(this));
-            token.safeTransferFrom(address(this), to, amount);
+            token.safeTransfer(to, amount);
         }
 
         emit Funded(to, amount);
