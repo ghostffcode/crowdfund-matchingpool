@@ -1,7 +1,7 @@
 //SPDX-License-Identifier: MIT
 pragma solidity >=0.8.0 <0.9.0;
 
-import "hardhat/console.sol";
+// import "hardhat/console.sol";
 
 import { Clones } from "@openzeppelin/contracts/proxy/Clones.sol";
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
@@ -30,7 +30,7 @@ contract CrowdfundFactory is Ownable {
 
         address _crowdfund = Clones.clone(address(crowdfundContract));
 
-        console.log(_crowdfund);
+        // console.log(_crowdfund);
 
         CrowdfundImplementation(_crowdfund).initialize(meta);
         
