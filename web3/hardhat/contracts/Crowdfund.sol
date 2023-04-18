@@ -42,7 +42,7 @@ contract Crowdfund is Ownable, ReentrancyGuard {
     }
 
     modifier crowdfundingIsActive() {
-        if (endsAt < block.timestamp || block.timestamp > startsAt) {
+        if (block.timestamp < endsAt || block.timestamp > startsAt) {
             revert inactiveCrowdfund();
         }
         _;
