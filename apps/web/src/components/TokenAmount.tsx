@@ -21,7 +21,7 @@ export const TokenAmount = ({
 
   return (
     <Skeleton className="w-24" isLoading={isLoading}>
-      {formatMoney(formatted(amount))}
+      {data?.symbol} {formatMoney(formatted(amount))}
     </Skeleton>
   );
 };

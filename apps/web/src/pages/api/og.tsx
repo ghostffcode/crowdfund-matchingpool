@@ -62,7 +62,7 @@ const fetchFont = (weight = "400") =>
 export default async function handler(req: NextRequest) {
   try {
     const { searchParams } = new URL(req.url);
-    const address = searchParams.get("crowdfundAddress")?.toLocaleLowerCase();
+    const address = searchParams.get("crowdfundAddress")?.toLowerCase();
     const chainId = searchParams.get("chainId");
     if (!address) {
       throw new Error("No crowdfund address provided");

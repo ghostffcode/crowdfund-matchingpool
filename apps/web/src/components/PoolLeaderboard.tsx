@@ -1,20 +1,38 @@
+import { useQuery } from "@tanstack/react-query";
+import { useReducer } from "react";
 import { Address } from "wagmi";
+import { useDonations } from "~/hooks/useCrowdfund";
+import { Donation } from "~/types";
 import { EnsAvatar } from "./EnsAvatar";
 import { EnsName } from "./EnsName";
 import { TokenAmount } from "./TokenAmount";
 import { Button } from "./ui/Button";
 
-type Props = { token: Address; donations: any[] };
+type Props = { address: Address; token: Address; donations: Donation[] };
 
-export const Leaderboard = ({ token, donations = [] }: Props) => {
+export const Leaderboard = ({ address, token, donations = [] }: Props) => {
+  const [{ first, skip }, loadMore] = useReducer(
+    (state) => ({ ...state, skip: state.skip + 100 }),
+    { first: 100, skip: 0 }
+  );
+
+  const { data } = useDonations(
+    {
+      address,
+      first,
+      skip,
+    },
+    donations
+  );
+
   return (
     <section>
       <h4 className="mb-2 text-xl font-bold">Leaderboard</h4>
       <div className="mb-4 flex flex-col divide-y divide-solid">
-        {!donations.length ? (
+        {!data.length ? (
           <div className="text-center">No contributions yet</div>
         ) : (
-          donations.map((donation) => (
+          data.map((donation) => (
             <div
               key={donation.user.address}
               className="flex  border-black/80 py-6"
@@ -35,12 +53,8 @@ export const Leaderboard = ({ token, donations = [] }: Props) => {
         )}
       </div>
       <div className="flex justify-center">
-        {donations.length ? (
-          <Button
-            className="w-72"
-            onClick={() => alert("not implemented")}
-            variant="ghost"
-          >
+        {data.length ? (
+          <Button className="w-72" onClick={loadMore} variant="ghost">
             Load more
           </Button>
         ) : null}
