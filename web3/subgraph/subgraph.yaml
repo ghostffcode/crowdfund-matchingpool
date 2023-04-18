@@ -6,7 +6,7 @@ dataSources:
     name: CrowdfundFactory
     network: goerli
     source:
-      address: "0x7ce05db48e2b450fa292d8ba482ba859f398935e"
+      address: "0xBC0A82Da08E13a939F4D86FaF01Cc22E7DFFac53"
       abi: CrowdfundFactory
       startBlock: 8811238
     mapping:
