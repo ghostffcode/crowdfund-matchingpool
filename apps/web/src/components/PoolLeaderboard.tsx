@@ -32,7 +32,7 @@ export const Leaderboard = ({ address, token, donations = [] }: Props) => {
         {!data.length ? (
           <div className="text-center">No contributions yet</div>
         ) : (
-          data.map((donation) => (
+          data.map((donation: Donation) => (
             <div
               key={donation.user.address}
               className="flex  border-black/80 py-6"
