@@ -11,15 +11,41 @@ const contractDeploy: DeployFunction = async ({ getNamedAccounts, deployments, g
   const { deployer } = await getNamedAccounts()
   const chainId = await getChainId()
 
-  await deploy('CrowdfundFactory', {
+  await deploy('CrowdfundImplementation', {
     from: deployer,
     log: true,
     autoMine: true,
     waitConfirmations: chainId === localChainId ? 1 : 5,
   })
 
+  const CrowdfundImplementation = await ethers.getContract('CrowdfundImplementation', deployer)
+
+  await deploy('CrowdfundFactory', {
+    from: deployer,
+    log: true,
+    autoMine: true,
+    args: [CrowdfundImplementation.address],
+    waitConfirmations: chainId === localChainId ? 1 : 5,
+  })
+
   // Getting a previously deployed contract
-  const CrowdfundFactory = await ethers.getContract('CrowdfundFactory', deployer)
+  // const CrowdfundFactory = await ethers.getContract('CrowdfundFactory', deployer)
+
+  // test things out
+  /**
+   * 
+  await CrowdfundFactory.createCrowdfund(ethers.utils.defaultAbiCoder.encode(
+    ["address", "address", "uint256", "uint256", "uint256", "bytes"],
+    ["0x2A5B1B6188669da07947403Da21F1CAB501374e6", "0x0000000000000000000000000000000000000000", Date.now() + 10*30000, Date.now() + 10*300000, ethers.utils.parseUnits('10'), ethers.utils.toUtf8Bytes("Sample description text")]
+  ));
+
+  const sampleApp = await ethers.getContractAt('CrowdfundImplementation', sampleImplentationAddress);
+
+  const startDate = await sampleApp.startsAt();
+
+  console.log({ startDate })
+   */
+
   /*  await YourContract.setPurpose("Hello");
   
     To take ownership of yourContract using the ownable library uncomment next line and add the 
@@ -71,4 +97,4 @@ const contractDeploy: DeployFunction = async ({ getNamedAccounts, deployments, g
 }
 
 export default contractDeploy;
-contractDeploy.tags = ['CrowdfundFactory']
+contractDeploy.tags = ['CrowdfundFactory', 'CrowdfundImplementation']

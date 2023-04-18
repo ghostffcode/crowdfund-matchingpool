@@ -3,8 +3,10 @@ pragma solidity >=0.8.0 <0.9.0;
 
 import {Ownable} from "@openzeppelin/contracts/access/Ownable.sol";
 import {IERC20} from "@openzeppelin/contracts/token/ERC20/IERC20.sol";
-import {ReentrancyGuard} from "@openzeppelin/contracts/security/ReentrancyGuard.sol";
+
+import { Initializable } from "@openzeppelin/contracts/proxy/utils/Initializable.sol";
 import {SafeERC20} from "@openzeppelin/contracts/token/ERC20/utils/SafeERC20.sol";
+import {ReentrancyGuard} from "@openzeppelin/contracts/security/ReentrancyGuard.sol";
 
 error dateError();
 error invalidGoal();
@@ -16,7 +18,7 @@ error notEnoughTokenDonation();
 error NotEnoughBalance();
 error FailedToSendNativeToken();
 
-contract Crowdfund is Ownable, ReentrancyGuard {
+contract CrowdfundImplementation is Ownable, Initializable, ReentrancyGuard {
     using SafeERC20 for IERC20;
 
     IERC20 public token;
@@ -48,7 +50,11 @@ contract Crowdfund is Ownable, ReentrancyGuard {
         _;
     }
 
-    constructor(bytes memory meta) {
+    constructor () {
+        _disableInitializers();
+    }
+
+    function initialize(bytes memory meta) initializer public {
         (
             address safe,
             address _token,

@@ -27,12 +27,27 @@
   },
   {
     "inputs": [],
+    "name": "crowdfundIsActive",
+    "type": "error"
+  },
+  {
+    "inputs": [],
     "name": "dateError",
     "type": "error"
   },
   {
     "inputs": [],
+    "name": "inactiveCrowdfund",
+    "type": "error"
+  },
+  {
+    "inputs": [],
     "name": "invalidGoal",
+    "type": "error"
+  },
+  {
+    "inputs": [],
+    "name": "notEnoughTokenDonation",
     "type": "error"
   },
   {
