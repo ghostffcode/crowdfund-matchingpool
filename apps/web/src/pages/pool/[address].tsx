@@ -48,6 +48,7 @@ const ViewMatchingPool: NextPage<{ address: string } & MatchingPool> = ({
     donations,
     ...rest,
   });
+
   return (
     <Layout>
       <Head>
@@ -83,7 +84,7 @@ const ViewMatchingPool: NextPage<{ address: string } & MatchingPool> = ({
             Contribute now
           </Button>
         )}
-        <Leaderboard donations={donations} token={token} />
+        <Leaderboard address={address} donations={donations} token={token} />
       </div>
     </Layout>
   );

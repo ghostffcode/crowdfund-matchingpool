@@ -1,4 +1,6 @@
+import { useQuery } from "@tanstack/react-query";
 import { gql, GraphQLClient } from "graphql-request";
+import { Donation } from "~/types";
 
 const subgraphUrl = process.env.NEXT_PUBLIC_SUBGRAPH_URL || "";
 const client = new GraphQLClient(subgraphUrl, {
@@ -15,18 +17,7 @@ token
 metaPtr
 goal
 totalDonations
-donations(
-  first: $first
-  skip: $skip
-  orderBy: amount
-  orderDirection: desc
-) {
-  amount
-  balance
-  user {
-    address
-  }
-}
+
 `;
 const crowdfundQuery = gql/* GraphQL */ `
   query getCrowdfund($address: ID!, $first: Int, $skip: Int) {
@@ -64,8 +55,6 @@ export async function queryCrowdfund({
   return crowdfund;
 }
 
-// TODO: Add query for pagination
-
 export async function queryCrowdfunds({
   first = 100,
   skip = 0,
@@ -81,4 +70,23 @@ export async function queryCrowdfunds({
     }
   );
   return crowdfunds;
+}
+
+// TODO: Add query for pagination
+
+export function useDonations(
+  params: { address: string; first: number; skip: number },
+  donations: Donation[]
+) {
+  return useQuery(
+    ["donations", params],
+    async () => {
+      return queryCrowdfund(params).then((crowdfund) => crowdfund.donations);
+    },
+    {
+      initialData: donations,
+      keepPreviousData: true,
+      enabled: Boolean(params.address),
+    }
+  );
 }

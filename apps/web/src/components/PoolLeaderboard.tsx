@@ -1,12 +1,25 @@
+import { useQuery } from "@tanstack/react-query";
+import { useState } from "react";
 import { Address } from "wagmi";
+import { useDonations } from "~/hooks/useCrowdfund";
+import { Donation } from "~/types";
 import { EnsAvatar } from "./EnsAvatar";
 import { EnsName } from "./EnsName";
 import { TokenAmount } from "./TokenAmount";
 import { Button } from "./ui/Button";
 
-type Props = { token: Address; donations: any[] };
+type Props = { address: Address; token: Address; donations: Donation[] };
 
-export const Leaderboard = ({ token, donations = [] }: Props) => {
+export const Leaderboard = ({ address, token, donations = [] }: Props) => {
+  const [{ first, skip }] = useState({ first: 100, skip: 0 });
+  const { data } = useDonations(
+    {
+      address,
+      first,
+      skip,
+    },
+    donations
+  );
   return (
     <section>
       <h4 className="mb-2 text-xl font-bold">Leaderboard</h4>
@@ -36,11 +49,7 @@ export const Leaderboard = ({ token, donations = [] }: Props) => {
       </div>
       <div className="flex justify-center">
         {donations.length ? (
-          <Button
-            className="w-72"
-            onClick={() => alert("not implemented")}
-            variant="ghost"
-          >
+          <Button className="w-72" onClick={handleLoadMore} variant="ghost">
             Load more
           </Button>
         ) : null}

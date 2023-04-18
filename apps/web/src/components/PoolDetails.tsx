@@ -4,7 +4,11 @@ export const PoolDetails = ({ title = "", description = "" }) => (
       {title}
     </h1>
     <h3 className="text-xl leading-8">{description}</h3>
-    <a href="#" className="font-bold" onClick={() => alert("not implemented")}>
+    <a
+      href="#"
+      className="invisible font-bold"
+      onClick={() => alert("not implemented")}
+    >
       Read more
     </a>
   </section>
