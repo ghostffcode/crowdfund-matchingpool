@@ -26,7 +26,7 @@ export const Organizers = ({ safe }: Props) => {
     abi,
     functionName: "getOwners",
     enabled: Boolean(safe),
-    chainId: 137,
+    chainId: 1,
   });
   const organizers = (data || Array.from({ length: 3 })) as Address[];
 
