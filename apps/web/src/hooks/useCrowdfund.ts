@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { gql, GraphQLClient } from "graphql-request";
 import { Donation } from "~/types";
 
@@ -17,7 +17,7 @@ token
 metaPtr
 goal
 totalDonations
-donations {
+donations(first: $first, skip: $skip) {
   user { id}
   amount
 }
@@ -43,11 +43,13 @@ export async function queryCrowdfund({
   address,
   first = 100,
   skip = 0,
+  ...rest
 }: {
   address: string;
   first?: number;
   skip?: number;
 }) {
+  console.log(123123, { first, skip }, rest);
   const { crowdfund } = await client.request<{ crowdfund: any }>(
     crowdfundQuery,
     {
@@ -77,20 +79,20 @@ export async function queryCrowdfunds({
 }
 
 export function useDonations(
-  params: { address: string; first: number; skip: number },
+  params: { address: string },
   donations: Donation[]
 ) {
-  return useQuery(
-    ["donations", params],
-    async () => {
-      return queryCrowdfund(params).then(
+  const first = 20;
+  const query = useInfiniteQuery({
+    queryKey: ["donations"],
+    queryFn: async ({ pageParam = 0 }) =>
+      queryCrowdfund({ ...params, first, skip: pageParam * first }).then(
         (crowdfund) => crowdfund.donations || []
-      );
-    },
-    {
-      initialData: donations,
-      keepPreviousData: true,
-      enabled: Boolean(params.address),
-    }
-  );
+      ),
+    getNextPageParam: (lastPage, pages) => pages.length,
+    keepPreviousData: true,
+    enabled: Boolean(params.address),
+  });
+
+  return query;
 }
