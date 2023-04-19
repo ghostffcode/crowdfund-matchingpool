@@ -1,8 +1,7 @@
-import { ConnectButton } from "@rainbow-me/rainbowkit";
 import { ethers } from "ethers";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { Address, useWaitForTransaction } from "wagmi";
+import { Address, useNetwork, useWaitForTransaction } from "wagmi";
 import { z } from "zod";
 import { Button } from "~/components/ui/Button";
 import {
@@ -12,7 +11,6 @@ import {
   Select,
   Textarea,
 } from "~/components/ui/Form";
-import { poolMetadata } from "~/data/mock";
 import { useCrowdfundCreate } from "~/hooks/useCrowdfundCreate";
 import { useIpfsUpload } from "~/hooks/useIpfsUpload";
 import { Layout } from "~/layouts/Layout";
@@ -44,7 +42,7 @@ const tokens = [
 ];
 const CreateForm = () => {
   const router = useRouter();
-
+  const { chain } = useNetwork();
   const hash = router.query.tx as Address;
   const create = useCrowdfundCreate({
     onSuccess: ({ hash }) => {
@@ -54,7 +52,6 @@ const CreateForm = () => {
   });
   const uploadMeta = useIpfsUpload();
 
-  console.log("create", create);
   const tx = useWaitForTransaction({
     hash,
     enabled: Boolean(hash),
@@ -62,7 +59,7 @@ const CreateForm = () => {
       const log = data.logs[2];
       if (log) {
         const { crowdfund } = create.iface.parseLog(log).args;
-        router.push(`/pool/${crowdfund}`);
+        router.push(`/pool/${crowdfund}?chainId=${chain?.id}`);
       }
     },
   });
@@ -98,7 +95,7 @@ const CreateForm = () => {
       }}
     >
       <FormControl label="Title" name="title">
-        <Input autoFocus placeholder="Enter a title..." />
+        <Input required autoFocus placeholder="Enter a title..." />
       </FormControl>
       <FormControl label="Description" name="description">
         <Textarea
@@ -107,10 +104,10 @@ const CreateForm = () => {
         />
       </FormControl>
       <FormControl label="Safe address" name="safe">
-        <Input placeholder="0x..." />
+        <Input required placeholder="0x..." />
       </FormControl>
       <FormControl label="Fundraising goal" name="goal">
-        <Input type="number" placeholder="1000" />
+        <Input min={0} required type="number" placeholder="1000" />
       </FormControl>
 
       <FormControl label="Token" name="token">
@@ -138,10 +135,6 @@ const CreateForm = () => {
 const CreateCrowdfund: NextPage = () => {
   return (
     <Layout>
-      <div className="mb-6">
-        <span>Temporary connect wallet</span>
-        <ConnectButton />
-      </div>
       <h4 className="mb-6 text-center text-xl font-bold">
         Create new crowdfund
       </h4>

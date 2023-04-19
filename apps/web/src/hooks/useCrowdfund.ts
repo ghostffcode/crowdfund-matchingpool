@@ -49,15 +49,11 @@ export async function queryCrowdfund({
   first?: number;
   skip?: number;
 }) {
-  console.log(123123, { first, skip }, rest);
   const { crowdfund } = await client.request<{ crowdfund: any }>(
     crowdfundQuery,
-    {
-      address,
-      first,
-      skip,
-    }
+    { address, first, skip }
   );
+
   return crowdfund;
 }
 

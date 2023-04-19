@@ -2,6 +2,7 @@ import { Address, useContractRead } from "wagmi";
 import { EnsAvatar } from "./EnsAvatar";
 import { EnsName } from "./EnsName";
 import { Skeleton } from "./ui/Skeleton";
+import { useEffect, useState } from "react";
 
 type Props = { safe: Address };
 
@@ -21,25 +22,33 @@ const abi = [
   },
 ];
 export const Organizers = ({ safe }: Props) => {
+  const [isLoaded, setLoaded] = useState(false);
+
   const { data, isLoading, error } = useContractRead({
     address: safe,
     abi,
     functionName: "getOwners",
     enabled: Boolean(safe),
-    chainId: 1,
+    chainId: 137,
   });
+
+  // Fixes hydration issue
+  useEffect(() => setLoaded(true), []);
+  if (!isLoaded) return null;
+
   const organizers = (data || Array.from({ length: 3 })) as Address[];
 
-  console.log(error);
   return (
     <section>
       <h4 className="mb-6 text-center text-xl font-bold">Organized by</h4>
+      {error ? (
+        <div className="text-center">Couldn&apos;t load organizers</div>
+      ) : null}
       <div className="flex justify-center">
         <div className="flex gap-10 overflow-x-auto">
-          {error ? <div>Couldn&apos;t load organizers</div> : null}
-          {organizers.map((address) => (
+          {organizers.map((address, i) => (
             <div
-              key={address}
+              key={address || i}
               className="group flex flex-col items-center justify-center"
             >
               <EnsAvatar
