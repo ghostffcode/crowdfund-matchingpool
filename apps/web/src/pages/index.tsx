@@ -25,7 +25,7 @@ const Home: NextPage<{ crowdfunds: MatchingPool[] }> = ({
           </div>
       </div>
       <div className="flex flex-col gap-4">
-        {/* {crowdfunds.map((cf) => (
+        {crowdfunds.map((cf) => (
           <Link
             href={`/pool/${cf.id}`}
             key={cf.id}
@@ -45,7 +45,7 @@ const Home: NextPage<{ crowdfunds: MatchingPool[] }> = ({
               <div>{truncate(cf.description, 80)}</div>
             </div>
           </Link>
-        ))} */}
+        ))}
       </div>
     </Layout>
   );
