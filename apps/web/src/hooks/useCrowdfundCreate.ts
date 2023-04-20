@@ -9,6 +9,7 @@ export function useCrowdfundCreate({
   onSuccess: (data: SendTransactionResult) => void;
 }) {
   const CrowdfundFactory = useContractConfig("CrowdfundFactory");
+  console.log({ CrowdfundFactory });
   return {
     ...useContractWrite({
       ...CrowdfundFactory,

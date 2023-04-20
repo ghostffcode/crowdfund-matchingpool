@@ -4,28 +4,16 @@ import ContractConfig from "../../contracts/hardhat_contracts.json";
 
 type ReturnType = { abi: string[]; address: Address };
 
-const { CrowdfundImplementation, CrowdfundFactory } = ContractConfig[5][0]
-  ?.contracts as any;
+type ContractTypes = keyof (typeof ContractConfig)[5][0]["contracts"];
 
-const config = {
-  CrowdfundFactory: {
-    abi: CrowdfundFactory.abi,
-    address: {
-      5: CrowdfundFactory.address,
-    },
-  },
-  Crowdfund: {
-    abi: CrowdfundImplementation.abi,
-    address: {},
-  },
-};
-
-export const useContractConfig = (name: keyof typeof config) => {
+export const useContractConfig = (name: ContractTypes) => {
   const { chain } = useNetwork();
-  const { abi, address } = config[name];
 
-  return {
-    abi,
-    address: address[chain?.id as keyof typeof address] as Address,
-  };
+  if (!chain?.id) return { address: "", abi: [] };
+
+  const { abi = [], address = "" } =
+    // @ts-ignore
+    ContractConfig[chain?.id]?.[0]?.contracts?.[name];
+
+  return { abi, address };
 };

@@ -18,7 +18,7 @@ import { PropsWithChildren } from "react";
 const availableChains =
   process.env.NODE_ENV === "production"
     ? [mainnet, polygon]
-    : [goerli, hardhat];
+    : [mainnet, polygon, goerli, hardhat];
 const { chains, provider } = configureChains(availableChains as any, [
   alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID as string }),
   publicProvider(),

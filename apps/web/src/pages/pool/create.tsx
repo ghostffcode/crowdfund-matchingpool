@@ -1,7 +1,8 @@
+import { fetchToken } from "@wagmi/core";
 import { ethers } from "ethers";
 import { NextPage } from "next";
 import { useRouter } from "next/router";
-import { Address, useNetwork, useWaitForTransaction } from "wagmi";
+import { Address, useNetwork, useToken, useWaitForTransaction } from "wagmi";
 import { z } from "zod";
 import { Button } from "~/components/ui/Button";
 import {
@@ -31,14 +32,19 @@ const tokens = [
     label: "ETH",
     address: "0x0000000000000000000000000000000000000000",
   },
-  {
-    label: "LINK",
-    address: "0x326C977E6efc84E512bB9C30f76E30c160eD06FB",
-  },
   // {
-  //   label: "USDC",
-  //   address: "0x5FbDB2315678afecb367f032d93F642f64180aa3",
+  //   label: "LINK",
+  //   address: "0x326C977E6efc84E512bB9C30f76E30c160eD06FB",
   // },
+  {
+    label: "USDC",
+    address: "0xA0b86991c6218b36c1d19D4a2e9Eb0cE3606eB48",
+    decimals: 6,
+  },
+  {
+    label: "DAI",
+    address: "0x6B175474E89094C44Da98b954EedeAC495271d0F",
+  },
 ];
 const CreateForm = () => {
   const router = useRouter();
@@ -77,6 +83,8 @@ const CreateForm = () => {
       }}
       schema={CreateCrowdfundSchema}
       onSubmit={async ({ title, description, safe, token, goal }) => {
+        const { decimals = 18 } = tokens.find((t) => t.address === token) || {};
+        console.log(decimals);
         const metaPtr = await uploadMeta.mutateAsync({ title, description });
 
         const endsAt = Math.floor(
@@ -88,9 +96,10 @@ const CreateForm = () => {
           token,
           0,
           endsAt,
-          ethers.utils.parseUnits(goal, 18), // TODO: Fetch token decimals!
+          ethers.utils.parseUnits(goal, decimals),
           ethers.utils.toUtf8Bytes(metaPtr),
         ]);
+
         create.write({ recklesslySetUnpreparedArgs: [params] });
       }}
     >
