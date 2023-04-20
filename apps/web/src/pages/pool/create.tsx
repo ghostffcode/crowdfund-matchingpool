@@ -91,10 +91,12 @@ const CreateForm = () => {
           (Date.now() + 1000 * 60 * 60 * 24 * 30) / 1000
         );
 
+        const startAt = Math.floor(Date.now() / 1000) + 600
+
         const params = encodeCrowdfundParams([
           safe,
           token,
-          0,
+          startAt,
           endsAt,
           ethers.utils.parseUnits(goal, decimals),
           ethers.utils.toUtf8Bytes(metaPtr),
