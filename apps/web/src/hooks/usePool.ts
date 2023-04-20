@@ -22,7 +22,7 @@ export function usePoolConfig({ address = "" }) {
 }
 
 export function useDonate(address: Address, onSuccess: () => void) {
-  const { abi } = useContractConfig("Crowdfund");
+  const { abi } = useContractConfig("CrowdfundFactory");
   const client = useQueryClient();
 
   const donate = useContractWrite({
