@@ -1,6 +1,6 @@
 import { useMemo } from "react";
 import { Address } from "wagmi";
-import { useDonations } from "~/hooks/useCrowdfund";
+import { DONATION_PAGE_SIZE, useDonations } from "~/hooks/useCrowdfund";
 import { Donation } from "~/types";
 import { EnsAvatar } from "./EnsAvatar";
 import { EnsName } from "./EnsName";
