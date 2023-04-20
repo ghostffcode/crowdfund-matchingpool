@@ -7,6 +7,7 @@ import {
   usePrepareContractWrite,
 } from "wagmi";
 import { useInvalidate } from "./useInvalidate";
+import { isNativeToken } from "~/utils/token";
 
 type ERC20Args = {
   token: Address;
@@ -46,6 +47,6 @@ export function useAllowance({ token, spender, owner }: AllowanceArgs) {
     abi: erc20ABI,
     functionName: "allowance",
     args: [owner, spender],
-    enabled: Boolean(token && spender && owner),
+    enabled: Boolean(!isNativeToken(token) && token && spender && owner),
   });
 }

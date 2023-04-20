@@ -49,15 +49,11 @@ export async function queryCrowdfund({
   first?: number;
   skip?: number;
 }) {
-  console.log(123123, { first, skip }, rest);
   const { crowdfund } = await client.request<{ crowdfund: any }>(
     crowdfundQuery,
-    {
-      address,
-      first,
-      skip,
-    }
+    { address, first, skip }
   );
+
   return crowdfund;
 }
 
@@ -78,11 +74,12 @@ export async function queryCrowdfunds({
   return crowdfunds;
 }
 
+export const DONATION_PAGE_SIZE = 20;
 export function useDonations(
   params: { address: string },
   donations: Donation[]
 ) {
-  const first = 20;
+  const first = DONATION_PAGE_SIZE;
   const query = useInfiniteQuery({
     queryKey: ["donations"],
     queryFn: async ({ pageParam = 0 }) =>

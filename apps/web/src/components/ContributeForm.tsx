@@ -7,10 +7,13 @@ import { Button } from "./ui/Button";
 import { useDonate } from "~/hooks/usePool";
 import ConnectWalletButton from "./ConnectWalletButton";
 import { isNativeToken } from "~/utils/token";
+import { useState } from "react";
+import { Input } from "./ui/Form";
 
 type Props = { token: Address; address: Address; onSuccess: () => void };
 
 export const ContributeForm = ({ token, address, onSuccess }: Props) => {
+  const [isSuccess, setSuccess] = useState(false);
   const form = useForm();
   const account = useAccount();
 
@@ -29,7 +32,7 @@ export const ContributeForm = ({ token, address, onSuccess }: Props) => {
 
   const approve = useApprove({ token, spender: address, amount });
 
-  const donate = useDonate(address, onSuccess);
+  const donate = useDonate(address, () => setSuccess(true));
 
   const hasAllowance =
     isNativeToken(token) || (amount.gt(0) && allowance.data?.gte(amount));
@@ -37,6 +40,17 @@ export const ContributeForm = ({ token, address, onSuccess }: Props) => {
     allowance.isLoading || approve.isLoading || donate.isLoading;
 
   const error = approve.error || donate.error;
+
+  if (isSuccess)
+    return (
+      <div className="">
+        <h3 className="mb-4 text-center text-lg font-bold">
+          Thank you for your contribution!
+        </h3>
+        <div className="mb-2">Here&apos;s a link to share on socials:</div>
+        <Input value={window.location.href} readOnly />
+      </div>
+    );
   return (
     <form
       onSubmit={form.handleSubmit((values) => {
