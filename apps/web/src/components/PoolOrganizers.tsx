@@ -1,4 +1,4 @@
-import { Address, useContractRead } from "wagmi";
+import { Address, useContractRead, useNetwork } from "wagmi";
 import { EnsAvatar } from "./EnsAvatar";
 import { EnsName } from "./EnsName";
 import { Skeleton } from "./ui/Skeleton";
@@ -23,13 +23,13 @@ const abi = [
 ];
 export const Organizers = ({ safe }: Props) => {
   const [isLoaded, setLoaded] = useState(false);
-
+  const { chain } = useNetwork();
   const { data, isLoading, error } = useContractRead({
     address: safe,
     abi,
     functionName: "getOwners",
     enabled: Boolean(safe),
-    chainId: 137,
+    chainId: chain?.id,
   });
 
   // Fixes hydration issue
