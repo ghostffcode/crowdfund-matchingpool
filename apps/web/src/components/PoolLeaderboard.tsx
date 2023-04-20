@@ -37,7 +37,7 @@ export const Leaderboard = ({ address, token, donations = [] }: Props) => {
         )}
       </div>
       <div className="flex justify-center">
-        {true || allDonations?.length ? (
+        {allDonations?.length === DONATION_PAGE_SIZE ? (
           <Button className="w-72" onClick={fetchNextPage} variant="ghost">
             Load more
           </Button>
