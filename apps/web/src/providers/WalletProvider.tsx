@@ -15,13 +15,14 @@ import { publicProvider } from "wagmi/providers/public";
 import { burnerWalletConfig } from "~/providers/burner-wallet/config";
 import { PropsWithChildren } from "react";
 
-const { chains, provider } = configureChains(
-  [goerli, polygon, mainnet, hardhat],
-  [
-    alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID as string }),
-    publicProvider(),
-  ]
-);
+const availableChains =
+  process.env.NODE_ENV === "production"
+    ? [mainnet, polygon]
+    : [goerli, hardhat];
+const { chains, provider } = configureChains(availableChains as any, [
+  alchemyProvider({ apiKey: process.env.NEXT_PUBLIC_ALCHEMY_ID as string }),
+  publicProvider(),
+]);
 
 const connectors = connectorsForWallets([
   {
