@@ -4,11 +4,11 @@ schema:
 dataSources:
   - kind: ethereum/contract
     name: CrowdfundFactory
-    network: goerli
+    network: mainnet
     source:
-      address: "0xA31d18FdA0B9b030306CEeF10354aeE701D9754a"
+      address: "0x6B33bF28d5D75e77148a471E51Da18Fb509bBce0"
       abi: CrowdfundFactory
-      startBlock: 8811238
+      startBlock: 17086973
     mapping:
       kind: ethereum/events
       apiVersion: 0.0.6
@@ -17,9 +17,9 @@ dataSources:
         - Crowdfund
       abis:
         - name: CrowdfundFactory
-          file: ./abis/localhost_CrowdfundFactory.json
+          file: ./abis/CrowdfundFactory.json
         - name: Crowdfund
-          file: ./abis/Crowdfund.json
+          file: ./abis/CrowdfundImplementation.json
       eventHandlers:
         - event: CrowdfundCreated(address,address)
           handler: handleNewCrowdfund
@@ -27,7 +27,7 @@ dataSources:
 templates:
   - name: Crowdfund
     kind: ethereum/contract
-    network: goerli
+    network: mainnet
     source:
       abi: Crowdfund
     mapping:
@@ -40,7 +40,7 @@ templates:
         - Funder
       abis:
         - name: Crowdfund
-          file: ./abis/Crowdfund.json
+          file: ./abis/CrowdfundImplementation.json
       eventHandlers:
         - event: Donated(address,uint256)
           handler: donationHandler

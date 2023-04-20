@@ -19,5 +19,13 @@
     "CrowdfundImplementation": {
       "address": "0x1F66e807aE7650831C135977E8B0D390072B3948"
     }
+  },
+  "mainnet": {
+    "CrowdfundFactory": {
+      "address": "0x6B33bF28d5D75e77148a471E51Da18Fb509bBce0"
+    },
+    "CrowdfundImplementation": {
+      "address": "0x7Ce05dB48e2b450Fa292D8Ba482ba859F398935e"
+    }
   }
 }
