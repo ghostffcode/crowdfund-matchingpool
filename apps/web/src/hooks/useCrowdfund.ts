@@ -17,7 +17,7 @@ token
 metaPtr
 goal
 totalDonations
-donations(first: $first, skip: $skip) {
+donations(first: $first, skip: $skip, orderBy: amount, orderDirection: desc) {
   user { id}
   amount
 }
