@@ -9,6 +9,14 @@ npm run
 npm run codegen # Generates graphql queries and typescript types
 ```
 
+To deploy contract:
+
+```sh
+cd web3/hardhat/
+yarn chain # start a local hardhat node
+yarn deploy # deploy contracts
+```
+
 ---
 
 # Turborepo starter
