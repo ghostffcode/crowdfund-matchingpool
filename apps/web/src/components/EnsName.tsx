@@ -10,7 +10,27 @@ export const EnsName = ({ address }: { address: Address }) => {
 
   return (
     <Skeleton className="w-24" isLoading={ens.isLoading}>
-      {ens.data || address}
+      {ens.data || truncateAddress(address)}
     </Skeleton>
   );
+};
+
+const truncateAddress = (str = "", max = 14, sep = "...") => {
+  const len = str.length;
+  if (len > max) {
+    const seplen = sep.length;
+
+    if (seplen > max) {
+      return str.substr(len - max);
+    }
+
+    const n = -0.5 * (max - len - seplen);
+    const center = len / 2;
+    const front = str.substr(0, center - n);
+    const back = str.substr(len - center + n);
+
+    return front + sep + back;
+  }
+
+  return str;
 };
