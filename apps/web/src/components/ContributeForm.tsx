@@ -27,6 +27,16 @@ export const ContributeForm = ({ token, address, onSuccess }: Props) => {
     spender: address,
   });
 
+  // TODO : Remove this for later
+  const showSuggestedAmounts =
+    address.toLowerCase() === "0x74ad514636f1386f374e1107435f35d393d0b279";
+
+  const suggestedAmounts = [
+    "0.69",
+    "0.420",
+    "0.1337"
+  ];
+
   const { symbol = "ETH", decimals, formatted } = balance.data || {};
   const amount = utils.parseUnits(form.watch("amount") || "0", decimals);
 
@@ -68,7 +78,7 @@ export const ContributeForm = ({ token, address, onSuccess }: Props) => {
       })}
     >
       <div className="mb-8">
-        <div className="mb-2 flex bg-gray-200">
+        <div className="mb-4 flex bg-gray-200">
           <input
             type="number"
             min={0}
@@ -83,13 +93,27 @@ export const ContributeForm = ({ token, address, onSuccess }: Props) => {
             {symbol}
           </div>
         </div>
-        <div className="flex justify-between">
-          <div className={isNativeToken(token) ? "invisible" : ""}>
+        <div className="flex justify-between mt-2">
+        {showSuggestedAmounts && (
+          <div className="text-sm">
+            {suggestedAmounts.map((_amount: string) => (
+              <span
+                className="mr-2 rounded border px-2 py-2 hover:bg-gray-200"
+                role="button"
+                key={_amount}
+                onClick={() => form.setValue("amount", _amount)}
+              >
+                {_amount} Ξ
+              </span>
+            ))}
+          </div>
+        )}
+          {/* <div className={isNativeToken(token) ? "invisible" : ""}>
             Allowance: {utils.formatUnits(allowance.data || "0", decimals)}{" "}
             {symbol}
-          </div>
+          </div> */}
           <div>
-            Balance: {formatted} {symbol}
+            Balance: {Number(formatted).toFixed(4)} {symbol}
           </div>
         </div>
       </div>
