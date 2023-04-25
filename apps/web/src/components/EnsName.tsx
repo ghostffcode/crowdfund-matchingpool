@@ -10,7 +10,7 @@ export const EnsName = ({ address }: { address: Address }) => {
 
   return (
     <Skeleton className="w-24" isLoading={ens.isLoading}>
-      {ens.data || truncateAddress(address)}
+      {ens.data || <span title={address}>{truncateAddress(address)}</span>}
     </Skeleton>
   );
 };
