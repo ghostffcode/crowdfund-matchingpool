@@ -70,6 +70,7 @@ const ViewMatchingPool: NextPage<{ address: string } & MatchingPool> = ({
           <div className="bg-white p-8 shadow-xl">
             <ContributeForm
               token={token}
+              title={title}
               address={address as Address}
               onSuccess={() => setOpen(false)}
             />
