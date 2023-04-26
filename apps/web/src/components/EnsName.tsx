@@ -10,7 +10,9 @@ export const EnsName = ({ address }: { address: Address }) => {
 
   return (
     <Skeleton className="w-24" isLoading={ens.isLoading}>
+      <a href={`https://etherscan.io/address/${address}`} target="_blank" rel="noreferrer">
       {ens.data || <span title={address}>{truncateAddress(address)}</span>}
+      </a>
     </Skeleton>
   );
 };
