@@ -106,9 +106,9 @@ export const ContributeForm = ({ token, address, title, onSuccess }: Props) => {
             {symbol}
           </div>
         </div>
-        <div className="mt-2 flex justify-between">
+        <div className={`mt-2 flex flex-col md:flex-row items-center justify-between ${showSuggestedAmounts }`}>
           {showSuggestedAmounts && (
-            <div className="text-sm">
+            <div className="text-sm mb-3 md:mb-0">
               {suggestedAmounts.map((_amount: string) => (
                 <span
                   className="mr-2 rounded border px-2 py-2 hover:bg-gray-200"
