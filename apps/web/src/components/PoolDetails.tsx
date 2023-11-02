@@ -1,6 +1,7 @@
 import React, { PropsWithChildren, useState } from "react";
 import ReactMarkdown from "react-markdown";
 import remarkGfm from "remark-gfm";
+import { pt_serif } from "~/pages/_app";
 
 export const PoolDetails = ({ title = "", description = "" }) => {
   const [showMore, setShowMore] = useState<boolean>(false)
@@ -9,10 +10,10 @@ export const PoolDetails = ({ title = "", description = "" }) => {
 
   return (
     <section>
-      <h1 className="mb-8 text-4xl font-black uppercase text-black/70 sm:text-5xl">
+      <h1 className="mb-8 text-4xl font-semibold uppercase text-black sm:text-5xl">
         {title}
       </h1>
-      <div className="prose prose-xl line-clamp-[20]">
+      <div className={`${pt_serif.className} prose line-clamp-[20] text-justify`}>
         <ReactMarkdown linkTarget={"_blank"} remarkPlugins={[remarkGfm]}>
           {canShowMore && !showMore ? `${description.slice(0, 140)}... ` : description}
         </ReactMarkdown>
@@ -20,7 +21,7 @@ export const PoolDetails = ({ title = "", description = "" }) => {
       {/* <h3 className="text-xl leading-8">{description}</h3> */}
       {canShowMore && <a
         href="#"
-        className="font-bold"
+        className="font-semibold"
         onClick={() => setShowMore(!showMore)}
       >
         {showMore ? "Show less" : "Read more"}

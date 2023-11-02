@@ -1,5 +1,4 @@
 import { type Config } from "tailwindcss";
-
 const colors = require("tailwindcss/colors");
 
 export default {
@@ -10,8 +9,8 @@ export default {
         ...colors,
         primary: {
           ...colors.indigo,
-          200: "#80FFBB",
-          600: "#5C4DFF",
+          200: "#FFFFFF",
+          600: "#000000",
         },
       },
     },
