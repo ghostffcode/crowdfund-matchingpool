@@ -2,7 +2,7 @@ import { createComponent } from ".";
 import { tv } from "tailwind-variants";
 import { dm_mono } from "~/pages/_app";
 
-const button = tv({
+const button = {
   base: `${dm_mono.className} rounded-lg inline-flex justify-center items-center text-gray-50 active:opacity-90 transition-colors`,
   variants: {
     color: {
@@ -27,6 +27,6 @@ const button = tv({
     size: "md",
     color: "default",
   },
-});
+};
 
-export const Button = createComponent("button", button);
+export const Button = createComponent("button", tv(button));
