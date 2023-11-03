@@ -2,7 +2,9 @@ import { createComponent } from "./ui";
 import { tv } from "tailwind-variants";
 import { Address } from "wagmi";
 import { TokenAmount } from "./TokenAmount";
-import { dm_mono } from "~/pages/_app";
+import { DM_Mono } from "next/font/google";
+
+const dm_mono = DM_Mono({weight: '400', subsets: ['latin']});
 
 type Props = { token: Address; goal: string; totalDonations: string };
 

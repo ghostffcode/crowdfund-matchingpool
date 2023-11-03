@@ -3,7 +3,8 @@ import { Address, useToken } from "wagmi";
 import { formatMoney } from "~/utils/currency";
 import { isNativeToken } from "~/utils/token";
 import { Skeleton } from "./ui/Skeleton";
-import { dm_mono } from "~/pages/_app";
+import { DM_Mono } from "next/font/google";
+const dm_mono = DM_Mono({weight: '400', subsets: ['latin']});
 
 export const TokenAmount = ({
   amount,
