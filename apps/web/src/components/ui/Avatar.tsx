@@ -4,7 +4,7 @@ import * as RadixAvatar from "@radix-ui/react-avatar";
 import { createComponent } from ".";
 import { Image } from "./Image";
 
-const avatar = tv({
+const avatar = {
   base: "block rounded-full relative",
   variants: {
     color: {
@@ -21,9 +21,9 @@ const avatar = tv({
     size: "md",
     color: "primary",
   },
-});
+};
 
-const Wrapper = createComponent(RadixAvatar.Root, avatar);
+const Wrapper = createComponent(RadixAvatar.Root as unknown as string, tv(avatar));
 
 export const Avatar = ({ src = "", alt = "", ...props }) => (
   <Wrapper {...props}>

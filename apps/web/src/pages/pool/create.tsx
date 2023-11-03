@@ -146,7 +146,7 @@ const CreateForm = () => {
 const CreateCrowdfund: NextPage = () => {
   return (
     <Layout>
-      <h4 className="mb-6 text-center text-xl font-bold">
+      <h4 className="mb-6 text-center text-xl xl:text-2xl font-semibold">
         Create new crowdfund
       </h4>
       <CreateForm />

@@ -107,7 +107,7 @@ export default async function handler(req: NextRequest) {
             backgroundColor: "white",
           }}
         >
-          <div tw="bg-[#FFE767] w-full h-full flex flex-col justify-between relative">
+          <div tw="bg-[#FAF7F3] w-full h-full flex flex-col justify-between relative">
             <div tw="flex absolute" style={{ width: 444, height: 845 }}>
               <RadialSVG />
             </div>
@@ -131,7 +131,7 @@ export default async function handler(req: NextRequest) {
                   style={{
                     width: percentage,
                     backgroundImage:
-                      "linear-gradient(to right, #80FFBB, #E6FF4D)",
+                      "linear-gradient(to right, #FFE5F8, #FEEFBE)",
                   }}
                 />
                 <span tw={indicatorStyle} style={{ left: percentage }} />

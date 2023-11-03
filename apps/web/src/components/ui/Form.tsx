@@ -18,21 +18,21 @@ import { z } from "zod";
 import clsx from "clsx";
 
 const inputStyle =
-  "block w-full p-2 border border-gray-200 focus:outline-indigo-500 bg-white";
-const input = tv({
-  base: inputStyle,
-});
-const textarea = tv({
+  "block w-full p-2 border border-gray-800 focus:outline-[#000000] bg-[#FAF7F3] rounded-lg";
+const input = {
+  base: inputStyle ,
+};
+const textarea = {
   base: `${inputStyle} resize-none`,
-});
-const label = tv({
-  base: "text-sm font-bold text-gray-500",
-});
+};
+const label = {
+  base: "text-sm font-semibold text-gray-500",
+};
 
-export const Input = createComponent("input", input);
-export const Select = createComponent("select", input);
-export const Textarea = createComponent("textarea", textarea);
-export const Label = createComponent("label", label);
+export const Input = createComponent("input", tv(input));
+export const Select = createComponent("select", tv(input));
+export const Textarea = createComponent("textarea", tv(textarea));
+export const Label = createComponent("label", tv(label));
 
 export const FormControl = ({
   name,

@@ -1,5 +1,5 @@
 import { forwardRef } from "react";
-import { TV, TVReturnType, TVSlots } from "tailwind-variants";
+import { TV, TVReturnType } from "tailwind-variants";
 
 type PolymorphicRef<C extends React.ElementType> =
   React.ComponentPropsWithRef<C>["ref"];

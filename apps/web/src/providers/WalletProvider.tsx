@@ -48,10 +48,9 @@ export const WalletProvider = ({ children }: PropsWithChildren) => (
       <RainbowKitProvider
         chains={chains}
         theme={lightTheme({
-          accentColor: "#5C4DFF",
-          accentColorForeground: "white",
-          borderRadius: "none",
-          fontStack: "system",
+          accentColor: "#000000",
+          accentColorForeground: "#FFFFFF",
+          borderRadius: "medium",
           overlayBlur: "small",
         })}
       >

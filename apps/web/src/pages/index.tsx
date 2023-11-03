@@ -8,18 +8,19 @@ import { truncate } from "~/utils/truncate";
 
 import { MatchingPool } from "~/types";
 import { Button } from "~/components/ui/Button";
+import { pt_serif } from "./_app";
 
 const Home: NextPage<{ crowdfunds: MatchingPool[] }> = ({
   crowdfunds = [],
 }) => {
   console.log(crowdfunds);
-  return (
+  return ( 
     <Layout>
       <div className="flex flex-1 flex-col items-center text-center mb-8">
-        <h1 className="text-2xl mb-4 font-semibold">Matching Pool Crowdfund Creator</h1>
-        <h2 className="text-base mb-2">Want to build momentum towards your Gitcoin Grants Round?   Use this tool to host a crowdfund contributions to your Matching pool + build momentum towards a bigger + better Gitcoin campaign.</h2>
+        <h1 className="sm:text-3xl text-2xl mb-4 font-semibold">Matching Pool Crowdfund Creator</h1>
+        <h2 className={`${pt_serif.className}text-base mb-2`}>Want to build momentum towards your Gitcoin Grants Round?   Use this tool to host a crowdfund contributions to your Matching pool + build momentum towards a bigger + better Gitcoin campaign.</h2>
         <div className="text-center my-4">
-          <Button color="primary" size="sm">
+          <Button color="primary" size="md">
             <Link href="/pool/create">Create Crowdfund</Link>
           </Button>
           </div>
@@ -34,7 +35,7 @@ const Home: NextPage<{ crowdfunds: MatchingPool[] }> = ({
             <div className="h-16 w-16 bg-black/50"></div>
             <div className="flex-1">
               <div className="flex items-center justify-between">
-                <div className="text-xl font-bold">{cf.title}</div>
+                <div className="text-xl font-semibold">{cf.title}</div>
                 <div className="flex gap-2">
                   <TokenAmount token={cf.token} amount={cf.totalDonations} />
                   <div>/</div>
@@ -42,7 +43,7 @@ const Home: NextPage<{ crowdfunds: MatchingPool[] }> = ({
                   <TokenAmount token={cf.token} amount={cf.goal} />
                 </div>
               </div>
-              <div>{truncate(cf.description, 80)}</div>
+              <div className={pt_serif.className}>{truncate(cf.description, 80)}</div>
             </div>
           </Link>
         ))}

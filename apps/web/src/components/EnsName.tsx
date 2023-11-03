@@ -1,5 +1,6 @@
 import { Address, useEnsName } from "wagmi";
 import { Skeleton } from "./ui/Skeleton";
+import { dm_mono } from "~/pages/_app";
 
 export const EnsName = ({ address }: { address: Address }) => {
   const ens = useEnsName({
@@ -10,7 +11,7 @@ export const EnsName = ({ address }: { address: Address }) => {
 
   return (
     <Skeleton className="w-24" isLoading={ens.isLoading}>
-      <a href={`https://etherscan.io/address/${address}`} target="_blank" rel="noreferrer">
+      <a href={`https://etherscan.io/address/${address}`} target="_blank" rel="noreferrer" className={dm_mono.className}>
       {ens.data || <span title={address}>{truncateAddress(address)}</span>}
       </a>
     </Skeleton>
