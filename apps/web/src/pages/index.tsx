@@ -52,12 +52,21 @@ const Home: NextPage<{ crowdfunds: MatchingPool[] }> = ({
   );
 };
 
+
 export async function getServerSideProps(ctx: GetServerSidePropsContext) {
+  const oldCrowdfundsIds = [
+  '0x2d26e03ada901193970e1aa193b7d9fed736726b',
+   '0x74ad514636f1386f374e1107435f35d393d0b279',
+   '0xed6a325127b7347715624d7b238ad0347dd04e48',
+   '0xfd87a966294e29af331842b6a1426c541a41d9b6']
+   
   const crowdfunds =
     (await Promise.all(
       (
         await queryCrowdfunds({})
-      ).map(async (crowdfund: MatchingPool) => {
+      )
+      .filter((crowdfund: MatchingPool) => !oldCrowdfundsIds.includes(crowdfund.id))
+      ?.map(async (crowdfund: MatchingPool) => {
         const metadata = await fetchIpfs(crowdfund.metaPtr);
         return {
           ...crowdfund,
