@@ -22,7 +22,7 @@ export const BaseLayout = ({ children }: PropsWithChildren) => {
           cardType: "summary_large_image",
         }}
       />
-      <main className="mx-auto min-h-screen bg-[#FAF7F3] text-[#000000]">
+      <main className="mx-auto min-h-screen text-[#000000]">
         <div className="">{children}</div>
       </main>
     </>

@@ -3,6 +3,7 @@ import { EnsAvatar } from "./EnsAvatar";
 import { EnsName } from "./EnsName";
 import { Skeleton } from "./ui/Skeleton";
 import { useEffect, useState } from "react";
+import { pt_serif } from "~/pages/_app";
 
 type Props = { safe: Address };
 
@@ -40,7 +41,7 @@ export const Organizers = ({ safe }: Props) => {
 
   return (
     <section>
-      <h4 className="mb-6 text-center text-xl font-semibold">Organized by</h4>
+      <h4 className={`${pt_serif.className} mb-6 text-center text-xl font-[500]`}>Organized by</h4>
       {error ? (
         <div className="text-center">Couldn&apos;t load organizers</div>
       ) : null}
@@ -57,7 +58,7 @@ export const Organizers = ({ safe }: Props) => {
                 color="gray"
                 size="md"
               />
-              <div className="text-lg font-semibold">
+              <div className="text-lg font-[500]">
                 <Skeleton className="h-4 w-24" isLoading={isLoading}>
                   <EnsName address={address} />
                 </Skeleton>

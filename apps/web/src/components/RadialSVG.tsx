@@ -367,7 +367,7 @@ export const RadialSVG = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(-35.9244 582.268) rotate(-80.1233) scale(355.437 342.865)"
       >
-        <stop stopColor="#FFE5F8" />
+        <stop stopColor="#B2DAD5" />
         <stop offset="1" stopColor="#FEEFBE" />
       </radialGradient>
       <radialGradient
@@ -378,7 +378,7 @@ export const RadialSVG = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(201.643 306.396) rotate(167.094) scale(384.868 371.255)"
       >
-        <stop offset="0.0677083" stopColor="#FFE5F8" />
+        <stop offset="0.0677083" stopColor="#B2DAD5" />
         <stop offset="0.696455" stopColor="#FEEFBE" />
       </radialGradient>
       <radialGradient
@@ -389,7 +389,7 @@ export const RadialSVG = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(-55.851 213.725) rotate(62.1019) scale(205.276 198.015)"
       >
-        <stop stopColor="#FFE5F8" />
+        <stop stopColor="#B2DAD5" />
         <stop offset="1" stopColor="#FEEFBE" />
       </radialGradient>
       <radialGradient
@@ -400,7 +400,7 @@ export const RadialSVG = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(63.5944 419.717) rotate(-126.711) scale(188.446 181.78)"
       >
-        <stop offset="0.0677083" stopColor="#FFE5F8" />
+        <stop offset="0.0677083" stopColor="#B2DAD5" />
         <stop offset="0.696455" stopColor="#FEEFBE" />
       </radialGradient>
     </defs>
@@ -793,7 +793,7 @@ export const RadialSVGRight = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(756.181 488.717) rotate(130.978) scale(409.539 395.054)"
       >
-        <stop offset="0.0677083" stopColor="#FFE5F8" />
+        <stop offset="0.0677083" stopColor="#B2DAD5" />
         <stop offset="0.708702" stopColor="#FEEFBE" />
       </radialGradient>
       <radialGradient
@@ -815,7 +815,7 @@ export const RadialSVGRight = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(669.062 580.675) rotate(130.978) scale(158.602 152.993)"
       >
-        <stop offset="0.0677083" stopColor="#FFE5F8" />
+        <stop offset="0.0677083" stopColor="#B2DAD5" />
         <stop offset="0.708702" stopColor="#FEEFBE" />
       </radialGradient>
     </defs>
@@ -1242,7 +1242,7 @@ export const RadialSVGBottom = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(370.657 544.088) rotate(27.0717) scale(384.868 371.255)"
       >
-        <stop offset="0.0677083" stopColor="#FFE5F8" />
+        <stop offset="0.0677083" stopColor="#B2DAD5" />
         <stop offset="0.696455" stopColor="#FEEFBE" />
       </radialGradient>
       <radialGradient
@@ -1264,7 +1264,7 @@ export const RadialSVGBottom = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(549.251 545.946) rotate(93.2669) scale(188.446 181.78)"
       >
-        <stop offset="0.0677083" stopColor="#FFE5F8" />
+        <stop offset="0.0677083" stopColor="#B2DAD5" />
         <stop offset="0.696455" stopColor="#FEEFBE" />
       </radialGradient>
       <radialGradient
@@ -1275,7 +1275,7 @@ export const RadialSVGBottom = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(731.482 486.609) rotate(139.854) scale(355.437 342.865)"
       >
-        <stop stopColor="#FFE5F8" />
+        <stop stopColor="#B2DAD5" />
         <stop offset="1" stopColor="#FEEFBE" />
       </radialGradient>
       <radialGradient
@@ -1286,7 +1286,7 @@ export const RadialSVGBottom = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(372.19 545.373) rotate(27.0717) scale(384.868 371.255)"
       >
-        <stop offset="0.0677083" stopColor="#FFE5F8" />
+        <stop offset="0.0677083" stopColor="#B2DAD5" />
         <stop offset="0.696455" stopColor="#FEEFBE" />
       </radialGradient>
       <radialGradient
@@ -1297,7 +1297,7 @@ export const RadialSVGBottom = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(509.966 781.824) rotate(-77.9204) scale(205.276 198.015)"
       >
-        <stop stopColor="#FFE5F8" />
+        <stop stopColor="#B2DAD5" />
         <stop offset="1" stopColor="#FEEFBE" />
       </radialGradient>
       <radialGradient
@@ -1308,7 +1308,7 @@ export const RadialSVGBottom = () => (
         gradientUnits="userSpaceOnUse"
         gradientTransform="translate(550.784 547.231) rotate(93.2669) scale(188.446 181.78)"
       >
-        <stop offset="0.0677083" stopColor="#FFE5F8" />
+        <stop offset="0.0677083" stopColor="#B2DAD5" />
         <stop offset="0.696455" stopColor="#FEEFBE" />
       </radialGradient>
     </defs>

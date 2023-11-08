@@ -16,6 +16,7 @@ import { useCrowdfundCreate } from "~/hooks/useCrowdfundCreate";
 import { useIpfsUpload } from "~/hooks/useIpfsUpload";
 import { Layout } from "~/layouts/Layout";
 import { encodeCrowdfundParams } from "~/utils/encodeParams";
+import { PPMori, dm_mono } from "../_app";
 
 export const CreateCrowdfundSchema = z.object({
   title: z.string().min(3).max(40),
@@ -74,6 +75,7 @@ const CreateForm = () => {
   const error = uploadMeta.error || create.error || tx.error;
 
   return (
+    <div className={dm_mono.className}>
     <Form
       defaultValues={{
         // ...poolMetadata,
@@ -140,13 +142,14 @@ const CreateForm = () => {
         {error?.toString()}
       </div>
     </Form>
+    </div>
   );
 };
 
 const CreateCrowdfund: NextPage = () => {
   return (
     <Layout>
-      <h4 className="mb-6 text-center text-xl xl:text-2xl font-semibold">
+      <h4 className={`${PPMori.className} mb-6 text-center text-xl xl:text-4xl font-[500]`}>
         Create new crowdfund
       </h4>
       <CreateForm />

@@ -26,18 +26,18 @@ export const RaisedProgress = ({ token, goal, totalDonations }: Props) => {
 };
 
 export const wrapperStyle =
-  "flex mb-6 w-full border-2 border-black/50 relative bg-[#FAF7F3]";
+  "flex mb-6 w-full border-2 border-black/50 relative bg-[#FFFFFF]";
 
 export const progressBarStyle =
-  "absolute h-full bg-gradient-to-r from-[#FFE5F8] to-[#FEEFBE]";
+  "absolute h-full bg-gradient-to-r from-[#B2DAD5] to-[#FEEFBE]";
 
 export const indicatorStyle =
   "absolute -top-2 h-16 border-2 border-r border-black/50";
 
-export const currentValueStyle = "absolute top-14  font-semibold text-black/50";
+export const currentValueStyle = "absolute top-14  font-[500] text-black/50";
 
 export const maxValueStyle =
-  "w-full p-2 text-right font-semibold text-black/50 relative z-10";
+  "w-full p-2 text-right font-[500] text-black/50 relative z-10";
 
 const Wrapper = createComponent("div", tv({ base: wrapperStyle }));
 const ProgressBar = createComponent("div", tv({ base: progressBarStyle }));

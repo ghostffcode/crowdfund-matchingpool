@@ -6,7 +6,7 @@ import { EnsAvatar } from "./EnsAvatar";
 import { EnsName } from "./EnsName";
 import { TokenAmount } from "./TokenAmount";
 import { Button } from "./ui/Button";
-import { dm_mono } from "~/pages/_app";
+import { PPMori, dm_mono } from "~/pages/_app";
 
 type Props = { address: Address; token: Address; donations: Donation[] };
 
@@ -19,7 +19,7 @@ export const Leaderboard = ({ address, token, donations = [] }: Props) => {
   );
   return (
     <section >
-      <h4 className="mb-2 text-xl font-semibold">Leaderboard</h4>
+      <h4 className={`${PPMori.className} mb-2 text-xl font-[500]`}>Leaderboard</h4>
       <div className={`mb-4 flex flex-col divide-y divide-solid ${dm_mono.className}`}>
         {!allDonations?.length ? (
           <div className="text-center">No contributions yet</div>

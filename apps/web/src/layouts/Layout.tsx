@@ -8,19 +8,15 @@ import {
 import { Container } from "~/components/ui/Container";
 
 import { BaseLayout } from "./BaseLayout";
+import Image from "next/image";
 
 export const Layout = ({ children }: PropsWithChildren) => {
   return (
     <BaseLayout>
-      <div className="pointer-events-none absolute z-0 w-1/4">
-        <RadialSVG />
+      <div className="pointer-events-none absolute bg-center z-0 ">
+        <Image src="/G1.svg" className="opacity-10 overflow-hidden" alt=""/>
       </div>
-      <div className="pointer-events-none absolute right-0 z-0 w-1/3">
-        <RadialSVGRight />
-      </div>
-      <div className="pointer-events-none fixed bottom-0 left-1/2 z-0 w-2/3 -translate-x-1/2">
-        <RadialSVGBottom />
-      </div>
+     
       <header className="flex h-32 justify-between p-2">
         <div />
         <div>

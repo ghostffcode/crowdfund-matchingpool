@@ -8,7 +8,7 @@ import { truncate } from "~/utils/truncate";
 
 import { MatchingPool } from "~/types";
 import { Button } from "~/components/ui/Button";
-import { pt_serif } from "./_app";
+import { PPMori, pt_serif } from "./_app";
 
 const Home: NextPage<{ crowdfunds: MatchingPool[] }> = ({
   crowdfunds = [],
@@ -16,11 +16,12 @@ const Home: NextPage<{ crowdfunds: MatchingPool[] }> = ({
   console.log(crowdfunds);
   return ( 
     <Layout>
-      <div className="flex flex-1 flex-col items-center text-center mb-8">
-        <h1 className="sm:text-3xl text-2xl mb-4 font-semibold">Matching Pool Crowdfund Creator</h1>
+      <div className="flex flex-1 flex-col items-center text-center mb-8 bg-[#B2DAD5] bg-opacity-60 sm:p-12 p-6 rounded-md">
+        <h1 className={`${PPMori.className} sm:text-4xl text-2xl mb-4 uppercase `}>Matching Pool <br/>Crowdfund Creator</h1>
         <h2 className={`${pt_serif.className}text-base mb-2`}>Want to build momentum towards your Gitcoin Grants Round?   Use this tool to host a crowdfund contributions to your Matching pool + build momentum towards a bigger + better Gitcoin campaign.</h2>
         <div className="text-center my-4">
-          <Button color="primary" size="md">
+          <Button 
+          size="md">
             <Link href="/pool/create">Create Crowdfund</Link>
           </Button>
           </div>
@@ -30,12 +31,12 @@ const Home: NextPage<{ crowdfunds: MatchingPool[] }> = ({
           <Link
             href={`/pool/${cf.id}`}
             key={cf.id}
-            className="flex gap-2 p-4 hover:bg-black/10"
+            className="flex gap-2 p-4 hover:bg-transparent transition-all duration-200 hover:-translate-y-[2px] bg-[#f5f5f5] border-2 border-[#f5f5f5]  rounded-md"
           >
-            <div className="h-16 w-16 bg-black/50"></div>
+            <div className="h-16 w-16 bg-gradient-to-r from-[#B2DAD5] to-[#FEEFBE] rounded-md"></div>
             <div className="flex-1">
               <div className="flex items-center justify-between">
-                <div className="text-xl font-semibold">{cf.title}</div>
+                <div className={`${PPMori.className} text-xl font-[500]`}>{cf.title}</div>
                 <div className="flex gap-2">
                   <TokenAmount token={cf.token} amount={cf.totalDonations} />
                   <div>/</div>

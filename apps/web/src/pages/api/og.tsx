@@ -9,6 +9,7 @@ import {
   progressBarStyle,
   wrapperStyle,
 } from "~/components/RaisedProgress";
+import { GG19 } from "~/components/ui/GG19";
 import { pool } from "~/data/mock";
 import { queryCrowdfund } from "~/hooks/useCrowdfund";
 import { formatMoney } from "~/utils/currency";
@@ -107,19 +108,15 @@ export default async function handler(req: NextRequest) {
             backgroundColor: "white",
           }}
         >
-          <div tw="bg-[#FAF7F3] w-full h-full flex flex-col justify-between relative">
-            <div tw="flex absolute" style={{ width: 444, height: 845 }}>
-              <RadialSVG />
-            </div>
+          <div tw="bg-[#FFFFFF] w-full h-full flex flex-col justify-between relative">
             <div
-              tw="flex absolute right-0 -bottom-72"
-              style={{ width: 444, height: 845 }}
+              tw="flex absolute " style={{ width: 444, height: 845 }}
             >
-              <RadialSVGRight />
+              <GG19 />
             </div>
             <div tw="flex flex-col pl-80 pr-32 pt-32">
               <div tw="flex flex-col mb-8">
-                <span tw="mb-4 text-6xl font-black uppercase text-black/70">
+                <span tw="mb-4 text-6xl font-black uppercase text-black/90">
                   {title}
                 </span>
                 <span tw="text-2xl">{truncate(description, 255)}</span>
@@ -131,7 +128,7 @@ export default async function handler(req: NextRequest) {
                   style={{
                     width: percentage,
                     backgroundImage:
-                      "linear-gradient(to right, #FFE5F8, #FEEFBE)",
+                      "linear-gradient(to right, #B2DAD5, #FEEFBE)",
                   }}
                 />
                 <span tw={indicatorStyle} style={{ left: percentage }} />
