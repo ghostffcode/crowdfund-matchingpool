@@ -15,7 +15,7 @@ export const PPMori = localFont({
       path: '/fonts/PPMori-Regular.otf',
   },
   {
-      path: '/fonts/PPMori-Semibold.otf',
+      path: '/fonts/PPMori-SemiBold.otf',
   }    
 ]
    });
