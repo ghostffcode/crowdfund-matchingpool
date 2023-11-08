@@ -6,15 +6,14 @@ import {
   RadialSVGRight,
 } from "~/components/RadialSVG";
 import { Container } from "~/components/ui/Container";
-
 import { BaseLayout } from "./BaseLayout";
-import Image from "next/image";
+import { GG19 } from "~/components/ui/GG19";
 
 export const Layout = ({ children }: PropsWithChildren) => {
   return (
     <BaseLayout>
-      <div className="pointer-events-none absolute bg-center z-0 ">
-        <Image src="/G1.svg" className="opacity-10 overflow-hidden" alt=""/>
+      <div className="pointer-events-none absolute left-0 right-0 top-0 bottom-0 bg-center z-0 ">
+        <GG19 />
       </div>
      
       <header className="flex h-32 justify-between p-2">
