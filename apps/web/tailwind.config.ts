@@ -5,6 +5,11 @@ export default {
   content: ["./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
+      fontFamily: {
+        'mono': ['var(--font-dm-mono)'],
+        'serif': ['var(--font-pt-serif)'],
+        'pp-mori': ['var(--font-pp-mori)']
+      },
       colors: {
         ...colors,
         primary: {

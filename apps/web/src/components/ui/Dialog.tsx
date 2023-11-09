@@ -24,7 +24,7 @@ export const Dialog = ({
     <Portal>
       <Overlay className="fixed inset-0 bg-black/30" />
       <Content className="fixed left-1/2 top-1/2 z-10 -translate-x-1/2 -translate-y-1/2 bg-white shadow-xl">
-        <Title className="bg-gradient-to-r from-[#FFE5F8] to-[#FEEFBE] py-8 text-center text-2xl">
+        <Title className="bg-gradient-to-r from-[#B2DAD5] to-[#FEEFBE] py-8 text-center text-2xl">
           {title}
         </Title>
         <Description className="">{description}</Description>

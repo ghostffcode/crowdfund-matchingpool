@@ -2,9 +2,6 @@ import { createComponent } from "./ui";
 import { tv } from "tailwind-variants";
 import { Address } from "wagmi";
 import { TokenAmount } from "./TokenAmount";
-import { DM_Mono } from "next/font/google";
-
-const dm_mono = DM_Mono({weight: '400', subsets: ['latin']});
 
 type Props = { token: Address; goal: string; totalDonations: string };
 
@@ -12,7 +9,7 @@ export const RaisedProgress = ({ token, goal, totalDonations }: Props) => {
   const percentage = `${(+totalDonations / +goal) * 100}%`;
 
   return (
-    <Wrapper className={`text-lg ${dm_mono.className}`}>
+    <Wrapper className="text-lg font-mono">
       <ProgressBar style={{ width: percentage }} />
       <Indicator style={{ left: percentage }} />
       <CurrentValue style={{ left: percentage, transform: `translateX(-50%)` }}>
@@ -26,18 +23,18 @@ export const RaisedProgress = ({ token, goal, totalDonations }: Props) => {
 };
 
 export const wrapperStyle =
-  "flex mb-6 w-full border-2 border-black/50 relative bg-[#FAF7F3]";
+  "flex mb-6 w-full border-2 border-black/50 relative bg-[#FFFFFF]";
 
 export const progressBarStyle =
-  "absolute h-full bg-gradient-to-r from-[#FFE5F8] to-[#FEEFBE]";
+  "absolute h-full bg-gradient-to-r from-[#B2DAD5] to-[#FEEFBE]";
 
 export const indicatorStyle =
   "absolute -top-2 h-16 border-2 border-r border-black/50";
 
-export const currentValueStyle = "absolute top-14  font-semibold text-black/50";
+export const currentValueStyle = "absolute top-14  font-medium text-black/50";
 
 export const maxValueStyle =
-  "w-full p-2 text-right font-semibold text-black/50 relative z-10";
+  "w-full p-2 text-right font-medium text-black/50 relative z-10";
 
 const Wrapper = createComponent("div", tv({ base: wrapperStyle }));
 const ProgressBar = createComponent("div", tv({ base: progressBarStyle }));

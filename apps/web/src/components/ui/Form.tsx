@@ -18,7 +18,7 @@ import { z } from "zod";
 import clsx from "clsx";
 
 const inputStyle =
-  "block w-full p-2 border border-gray-800 focus:outline-[#000000] bg-[#FAF7F3] rounded-lg";
+  "block w-full p-2 border border-gray-800 focus:outline-[#000000] rounded-lg";
 const input = {
   base: inputStyle ,
 };
@@ -26,7 +26,7 @@ const textarea = {
   base: `${inputStyle} resize-none`,
 };
 const label = {
-  base: "text-sm font-semibold text-gray-500",
+  base: "text-sm font-medium text-gray-500",
 };
 
 export const Input = createComponent("input", tv(input));

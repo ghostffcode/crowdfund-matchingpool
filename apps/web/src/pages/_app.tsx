@@ -1,19 +1,29 @@
 import "@rainbow-me/rainbowkit/styles.css";
 import "~/styles/globals.css";
 
-import { Inter, DM_Mono, PT_Serif } from "next/font/google";
-
+import { DM_Mono, PT_Serif } from "next/font/google";
+import localFont from 'next/font/local'
 import { type AppType } from "next/app";
 import { type Session } from "next-auth";
 
 import { api } from "~/utils/api";
 import { WalletProvider } from "~/providers/WalletProvider";
 
-const inter = Inter({ subsets: ["latin"] });
+const pp_mori = localFont({ 
+  src:
+    [ {
+        path: '/fonts/PPMori-Regular.otf',
+    },
+    {
+        path: '/fonts/PPMori-SemiBold.otf',
+    }    
+  ],
+  variable: "--font-pp-mori"
+});
 
-export const dm_mono = DM_Mono({weight: '400', subsets: ['latin']});
+const dm_mono = DM_Mono({weight: '400', subsets: ['latin'], variable: '--font-dm-mono'});
 
-export const pt_serif = PT_Serif({weight: '400', subsets: ['latin']});
+const pt_serif = PT_Serif({weight: '400', subsets: ['latin'], variable: '--font-pt-serif'});
 
 
 const MyApp: AppType<{ session: Session | null }> = ({
@@ -22,7 +32,7 @@ const MyApp: AppType<{ session: Session | null }> = ({
 }) => {
   return (
     <WalletProvider>
-      <main className={inter.className}>
+      <main className={`${pt_serif.variable} ${dm_mono.variable} ${pp_mori.variable}`}>
         <Component {...pageProps} />
       </main>
     </WalletProvider>

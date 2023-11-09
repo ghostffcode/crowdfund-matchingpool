@@ -12,6 +12,7 @@ import {
   Select,
   Textarea,
 } from "~/components/ui/Form";
+import { Heading } from "~/components/ui/Heading";
 import { useCrowdfundCreate } from "~/hooks/useCrowdfundCreate";
 import { useIpfsUpload } from "~/hooks/useIpfsUpload";
 import { Layout } from "~/layouts/Layout";
@@ -74,6 +75,7 @@ const CreateForm = () => {
   const error = uploadMeta.error || create.error || tx.error;
 
   return (
+    <div className="font-mono">
     <Form
       defaultValues={{
         // ...poolMetadata,
@@ -140,15 +142,16 @@ const CreateForm = () => {
         {error?.toString()}
       </div>
     </Form>
+    </div>
   );
 };
 
 const CreateCrowdfund: NextPage = () => {
   return (
     <Layout>
-      <h4 className="mb-6 text-center text-xl xl:text-2xl font-semibold">
+      <Heading className="mb-6 text-center text-xl xl:text-4xl">
         Create new crowdfund
-      </h4>
+      </Heading>
       <CreateForm />
     </Layout>
   );
