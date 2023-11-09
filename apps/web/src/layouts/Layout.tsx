@@ -11,6 +11,7 @@ import { GG19 } from "~/components/ui/GG19";
 
 export const Layout = ({ children }: PropsWithChildren) => {
   return (
+    <div className="font-serif">
     <BaseLayout>
       <div className="pointer-events-none absolute left-0 right-0 top-0 bottom-0 bg-center z-0 ">
         <GG19 />
@@ -25,5 +26,6 @@ export const Layout = ({ children }: PropsWithChildren) => {
       <Container className="relative z-10">{children}</Container>
       <footer className="py-32" />
     </BaseLayout>
+    </div>
   );
 };

@@ -2,6 +2,8 @@ import { useInfiniteQuery, useQuery } from "@tanstack/react-query";
 import { gql, GraphQLClient } from "graphql-request";
 import { Donation } from "~/types";
 
+const MIN_CROWDFUND_DATE = Math.round((new Date(2023, 10)).getTime() / 1000);
+
 const subgraphUrl = process.env.NEXT_PUBLIC_SUBGRAPH_URL || "";
 const client = new GraphQLClient(subgraphUrl, {
   fetch,
@@ -33,7 +35,7 @@ const crowdfundQuery = gql/* GraphQL */ `
 
 const crowdfundsQuery = gql/* GraphQL */ `
   query getCrowdfunds($first: Int, $skip: Int) {
-    crowdfunds {
+    crowdfunds(where: {createdAt_gt: ${MIN_CROWDFUND_DATE}}) {
       ${FRAGMENT}
     }
   }

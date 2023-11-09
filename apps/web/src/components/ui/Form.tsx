@@ -26,7 +26,7 @@ const textarea = {
   base: `${inputStyle} resize-none`,
 };
 const label = {
-  base: "text-sm font-[500] text-gray-500",
+  base: "text-sm font-medium text-gray-500",
 };
 
 export const Input = createComponent("input", tv(input));

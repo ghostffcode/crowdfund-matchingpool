@@ -12,11 +12,11 @@ import {
   Select,
   Textarea,
 } from "~/components/ui/Form";
+import { Heading } from "~/components/ui/Heading";
 import { useCrowdfundCreate } from "~/hooks/useCrowdfundCreate";
 import { useIpfsUpload } from "~/hooks/useIpfsUpload";
 import { Layout } from "~/layouts/Layout";
 import { encodeCrowdfundParams } from "~/utils/encodeParams";
-import { PPMori, dm_mono } from "../_app";
 
 export const CreateCrowdfundSchema = z.object({
   title: z.string().min(3).max(40),
@@ -75,7 +75,7 @@ const CreateForm = () => {
   const error = uploadMeta.error || create.error || tx.error;
 
   return (
-    <div className={dm_mono.className}>
+    <div className="font-mono">
     <Form
       defaultValues={{
         // ...poolMetadata,
@@ -149,9 +149,9 @@ const CreateForm = () => {
 const CreateCrowdfund: NextPage = () => {
   return (
     <Layout>
-      <h4 className={`${PPMori.className} mb-6 text-center text-xl xl:text-4xl font-[500]`}>
+      <Heading className="mb-6 text-center text-xl xl:text-4xl">
         Create new crowdfund
-      </h4>
+      </Heading>
       <CreateForm />
     </Layout>
   );

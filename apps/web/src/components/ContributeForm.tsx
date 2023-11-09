@@ -55,7 +55,7 @@ export const ContributeForm = ({ token, address, title, onSuccess }: Props) => {
   if (isSuccess)
     return (
       <div className="">
-        <h3 className="mb-4 text-center text-lg font-[500]">
+        <h3 className="mb-4 text-center text-lg font-medium">
           Thank you for your contribution!
         </h3>
         <div className="mb-2">Here&apos;s a link to share on socials:</div>

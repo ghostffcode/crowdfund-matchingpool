@@ -1,9 +1,8 @@
 import { createComponent } from ".";
 import { tv } from "tailwind-variants";
-import { dm_mono } from "~/pages/_app";
 
 const button = {
-  base: `${dm_mono.className} rounded-lg font-[500] inline-flex justify-center items-center text-gray-50 active:opacity-90 transition-colors`,
+  base: `font-mono rounded-lg font-medium inline-flex justify-center items-center text-gray-50 active:opacity-90 transition-colors`,
   variants: {
     color: {
       default: "bg-black hover:bg-gray-800 text-[#fbf7f3]",
